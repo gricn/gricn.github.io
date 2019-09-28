@@ -1,0 +1,9 @@
+current directory: D:/gricn.github.io/vendor/bundle/gems/commonmarker-0.17.13/ext/commonmarker
+C:/tools/ruby26/bin/ruby.exe -I C:/tools/ruby26/lib/ruby/2.6.0 -r ./siteconf20190928-15204-vzdvoe.rb extconf.rb
+creating Makefile
+
+current directory: D:/gricn.github.io/vendor/bundle/gems/commonmarker-0.17.13/ext/commonmarker
+make "DESTDIR=" clean
+current directory: D:/gricn.github.io/vendor/bundle/gems/commonmarker-0.17.13/ext/commonmarker
+make "DESTDIR="
+make failedNo such file or directory - make "DESTDIR="
