@@ -231,10 +231,10 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
-  - jemoji
+  # - jemoji
   - jekyll-include-cache
-  - jekyll-algolia
-  - jekyll-remote-theme
+  # - jekyll-algolia
+  # - jekyll-remote-theme
 
 # mimic GitHub Pages with --safe
 whitelist:
