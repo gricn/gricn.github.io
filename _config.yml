@@ -234,17 +234,17 @@ plugins:
   # - jemoji
   - jekyll-include-cache
   # - jekyll-algolia
-  # - jekyll-remote-theme
+  - jekyll-remote-theme
 
 # mimic GitHub Pages with --safe
-whitelist:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
-  - jekyll-include-cache
-  - jekyll-algolia
+# whitelist:
+#   - jekyll-paginate
+#   - jekyll-sitemap
+#   - jekyll-gist
+#   - jekyll-feed
+#   - jemoji
+#   - jekyll-include-cache
+#   - jekyll-algolia
 
 # Archives
 #  Type
