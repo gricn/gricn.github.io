@@ -35,6 +35,6 @@ date:   2019-08-07 01:00:00 +0800
 * Google Search： 这个东西最气人，因为我对它期望值最高。设置完CSE后，就是没有反应，不过还是可以在" site:gricn.github.io " 看到我的文章内容，也算没完全白忙活。
 * Algolia： 最终选择。作为一个美国公司，总担心它中文搜索不行，结果，它的英文搜索最糟糕，连文章内容 “yaml” 都搜索不到……（截止发文时间）
  
-以及，不能使用Windows的反斜杠"/"，必须正斜杠"\"。有空研究下stackexchange介绍的AutoHotKey Script.
+以及，不能使用Windows的反斜杠“/”，必须正斜杠“\”。有空研究下stackexchange介绍的AutoHotKey Script.
 
 就写这么多吧，马上1点半了（第三次修改时间了，晕），晚安~~
