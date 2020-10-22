@@ -113,7 +113,7 @@ author:
   location         : "Beijing, China"
   email            : "gricn666@gmail.com"
   links:
-up    # - label: "Email"
+    # - label: "Email"
     #   icon: "fas fa-fw fa-envelope-square"
     #   url: mailto:gricn666@gmail.com
     # - label: "Website"
