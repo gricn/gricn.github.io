@@ -113,12 +113,12 @@ author:
   location         : "Beijing, China"
   email            : "gricn666@gmail.com"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: mailto:gricn666@gmail.com
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      # url: "https://gricn.github.io"
+up    # - label: "Email"
+    #   icon: "fas fa-fw fa-envelope-square"
+    #   url: mailto:gricn666@gmail.com
+    # - label: "Website"
+    #   icon: "fas fa-fw fa-link"
+    #   url: "https://gricn.github.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/gricnnn"
