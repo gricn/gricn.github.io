@@ -233,7 +233,7 @@ plugins:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
-  # - jekyll-algolia
+  - jekyll-algolia
   - jekyll-remote-theme
 
 # mimic GitHub Pages with --safe
