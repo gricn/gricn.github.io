@@ -3,13 +3,18 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
-// max-width: $100%; // added semicolon
+
 
 $global-font-family: 'Roboto', sans-serif;
 
 // https://github.com/mmistakes/minimal-mistakes/issues/1219#issuecomment-326809412
 html {
     font-size: 12px; // originally 16px
+
+    @include breakpoint($small) {
+      font-size: 12px; // change to whatever
+    }
+
     @include breakpoint($medium) {
         font-size: 14px; // originally 18px
     }
