@@ -6,9 +6,10 @@ date:   2019-10-05 12:00:00 +0800
 原本在Ubuntu安装LibreOffice，但这软件和WPS不兼容，还险些误事，然后惊奇发现WPSoffice的Linux更新频繁，有人在维护，于是下载。但每次打开都会遇到“系统缺失字体”问题。
 
 于是Google下，查找解决方案（这里要顺带说下，在部分时候中文搜索结果超过英文，之前执意搜英文结果，效果不佳，绕了很久才出来，这里又躺坑了~~）
+
 <https://my.oschina.net/renwofei423/blog/635798>
 
-看了该篇文章并结合另外一些文章，我得到的有效信息是：
+看了该文章及其他文章，我得到的有效信息是：
 
 1. 从Windows系统的 C:/Windows/Fonts 文件夹复制Windows字体文件到Linux的 /usr/share/fonts/wps-office 文件夹中
 2. 执行以下命令生成字体索引信息
@@ -58,13 +59,13 @@ mount /dev/sda1
 
 super(windows)+a ，然后敲disks，打开Ubuntu那个app。
 
-![P1](/images/posts/Selection_004.png)
+![P1](https://i.imgur.com/1Vkw6L9.png)
 
 首先，你会发现一个奇怪的Mount地址。当然这是我修改后的，本来在当前用户下，一个非常奇贵啊的文件夹。
 
 那么怎么修改呢，首先点Volumes下、Size上那个小齿轮，选择“Edit Mount Options”（不知道中文是什么，大概在“修复文件系统”下面……）
 
-![P2](/images/posts/Selection_005.png)
+![P2](https://i.imgur.com/WzrOJnD.png)
 
 然后，先取消"User Session Defaults"，然后修改"Mount Point"到指定文件夹即可。
 
@@ -72,8 +73,7 @@ super(windows)+a ，然后敲disks，打开Ubuntu那个app。
 
 最后效果图如下
 
-![P3](/images/posts/wps_success.png)
-
+![P3](https://i.imgur.com/hxXIkE4.png)
 ----
 
 后记

@@ -26,7 +26,7 @@ date:   2019-08-07 01:00:00 +0800
 
     我这脑容量这么有限，这些东西又强行塞进了我的大脑┭┮﹏┭┮ 
 
-    ![smile-but-tired.jpg](/images/smile-but-tired.jpg)
+    ![smile-but-tired.jpg](https://i.imgur.com/ow07RDr.jpg)
 
 
 困死了，最后再说说搜索引擎的事吧。前天晚上刚弄完Disqus，30分钟不到就弄完了。本以为搜索引擎也是这么简单，没想到提供的三个搜索引擎都很难搞。

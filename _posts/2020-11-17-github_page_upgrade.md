@@ -9,6 +9,6 @@ date:   2020-11-17 08:00:00 +0800
 
 昨晚添加了Google Analytics
 
-![Google Analytics 4 一览](/images/posts/google_analytics_created.jpg)
+![Google Analytics 4 一览](https://i.imgur.com/HBHrqMs.jpg)
 
 然后开始刷文吧（不对，css是不是要调一调先）

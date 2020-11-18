@@ -9,8 +9,10 @@ date:   2019-10-3 23:00:00 +0800
 
 <https://jekyllrb.com/docs/plugins/installation/>
 
-在这之后就简单了，了解原理后，按照travis提示不断修改gemfile即可。
+在这之后就简单了，了解原理后，按照travis提示不断修改Gemfile即可。
 
-![配合travis修改gemfile](/images/posts/gemfile-setting.png)
+![配合travis修改gemfile](https://i.imgur.com/KqztGEP.png)
+
+可以查看我仓库最新Gemfile设置
 
 被这个小东西拖了几天，还很菜……但每次解决错误后很开心。

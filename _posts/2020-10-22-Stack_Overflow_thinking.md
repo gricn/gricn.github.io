@@ -11,13 +11,13 @@ date:   2020-10-22 10:45:00 +0800
 
 当时我的回答是这样的：
 
-![My answer in Stack Overflow](/images/never-use-regex-to-parse-html.jpg)
+![My answer in Stack Overflow](https://i.imgur.com/EuCTcOO.jpg)
 
 几小时后，一个大佬给我的回答一个踩。但看到后心里还是很开心（不是抖M~~）
 
 马上Google发现果然如此，如果我自己用正则来弄网页那就惨了，那估计得一下午才能绕过来的弯。
 
-如这篇网页介绍[Why cannot use regex to parse HTML](https://blog.codinghorror.com/parsing-html-the-cthulhu-way/)，以及这篇文章中谈及的4K赞的Stack Overflow回答。痛心疾首从伦理道德狠狠批评小白，千万不要用正则解析网页。强烈推荐阅读！
+如这篇网页介绍 [Why cannot use regex to parse HTML](https://blog.codinghorror.com/parsing-html-the-cthulhu-way/)，以及这篇文章中谈及的4K赞的Stack Overflow回答。痛心疾首从伦理道德狠狠批评小白，千万不要用正则解析网页。强烈推荐阅读！
 
 很开心
 
