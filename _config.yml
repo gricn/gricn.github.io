@@ -108,7 +108,7 @@ analytics:
 # Site Author
 author:
   name             : "William Liu"
-  avatar           : "/images/cat.png"
+  avatar           : "https://i.imgur.com/Vjg1Nvq.jpg"
   bio              : "一个正在努力奋斗的CS小白:smile:"
   location         : "Beijing, China"
   email            : "gricn666@gmail.com"
