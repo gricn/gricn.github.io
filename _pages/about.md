@@ -1,8 +1,9 @@
 ---
 title: "关于我"
 permalink: /about/
-layout: single
+layout: default
 author: William Liu
+author_profile: true
 excerpt: 吾生而有涯，而知也无涯
 header:
   overlay_image: https://i.imgur.com/pl0gO8I.jpg
@@ -11,7 +12,6 @@ header:
   # actions:
   #   - label: "More Info"
   #     url: "https://unsplash.com"
-author_profile: true
 ---
 
 非科班计算机小白，正在努力中 :smile:
