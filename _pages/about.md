@@ -1,16 +1,15 @@
 ---
-title: "About"
+title: "关于我"
 permalink: /about/
 layout: archive
 author: William Liu
 excerpt: 吾生而有涯，而知也无涯
 header:
   overlay_image: https://i.imgur.com/pl0gO8I.jpg
-  overlay_filter: 0.9
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
-  actions:
-    - label: "More Info"
-      url: "https://unsplash.com"
+  # actions:
+  #   - label: "More Info"
+  #     url: "https://unsplash.com"
 defaults:
   # _pages
   - scope:
