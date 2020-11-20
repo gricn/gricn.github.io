@@ -1,6 +1,7 @@
 ---
 title: "解决WPS for Linux的字体问题"
 date:   2019-10-05 12:00:00 +0800
+categories: 技术分享
 ---
 
 原本在Ubuntu安装LibreOffice，但这软件和WPS不兼容，还险些误事，然后惊奇发现WPSoffice的Linux更新频繁，有人在维护，于是下载。但每次打开都会遇到“系统缺失字体”问题。

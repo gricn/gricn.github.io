@@ -1,6 +1,7 @@
 ---
 title: "个人Blog搭建完成"
 date:   2019-08-07 01:00:00 +0800
+categories: 项目心得
 ---
 
 搭建blog过程一路撞坑。首先在Github偶然发现还有GitHub Page这样的不需自己购买服务器就可搭建网站的神器，然后知道它是基于Jekyll，但当时我觉得Jekyll默认的皮肤太丑了，于是我又投向了它的extension：[minimal-mistakes](https://github.com/mmistakes/minimal-mistakes). 当时看案例图觉得挺好看的，不过实际做出来后，才知道它们是“RMB玩家”~~

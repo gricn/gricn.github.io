@@ -1,7 +1,7 @@
 ---
 title: "项目两天"
 date:   2019-08-16 23:00:00 +0800
-# category: "日记？吐槽？"
+categories: 生活小事
 ---
 
 14号当天从早上9点到下午6点 `Probability and statistics`看了20页，大脑消耗过度以至无法运转，于是想通过做项目缓解。Check undolist后，发现有如下选项：

@@ -1,6 +1,7 @@
 ---
 title: "GitHub Page搭建总结-正经文"
 date:   2020-02-07 22:00:00 +0800
+categories: 项目心得
 ---
 
 ## 前言

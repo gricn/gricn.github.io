@@ -1,6 +1,7 @@
 ---
 title: "与Travis斗智斗勇"
 date:   2019-10-3 23:00:00 +0800
+categories: 技术分享
 ---
 
 之前一直不了解jekyll的_config.yml里的plugin和gemfile配置有什么区别，一直以为在_config.yml添加了plugin后就可以将gemfile全删了……
