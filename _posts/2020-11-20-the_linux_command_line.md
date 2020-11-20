@@ -1,6 +1,7 @@
 ---
 title: "Linux命令行大全"
 date:   2020-11-20 09:00:00 +0800
+categories: 读书笔记
 ---
 
 # Linux命令行大全

@@ -2,8 +2,6 @@
 main:
   - title: "About"
     url: /_pages/about/
-  - title: "读书笔记"
-    url: /learning_note/
   - title: "分类"
     url: /categories/
   # - title: "Sitemap"
