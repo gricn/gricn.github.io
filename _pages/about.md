@@ -1,7 +1,7 @@
 ---
 title: "关于我"
 permalink: /about/
-layout: default
+layout: archive
 author: William Liu
 author_profile: true
 excerpt: 吾生而有涯，而知也无涯
