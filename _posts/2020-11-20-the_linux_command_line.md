@@ -33,14 +33,14 @@ categories: 读书笔记
 取幂
 
 ``` bash
-echo $((5**2))  // output:25
+echo $((5**2))  # output:25
 ```
 
 取余（像C）
 
 ``` bash
-echo $((5/2)) // 2
-echo $((5%2)) // 1
+echo $((5/2)) # 2
+echo $((5%2)) # 1
 ```
 
 ### 花括号扩展
@@ -63,15 +63,15 @@ cmd硬生生把命令理解成生成两个文件夹（这也是我在win10大多
 文中讲到一个 `$` 导致出bug的例子
 
 ``` bash
-echo The total is $100.00  // output: The total is 00.00
+echo The total is $100.00  # output: The total is 00.00
 ```
 
 这里shell将$1理解为一个变量吞掉了，那么可以怎么做呢
 
 ``` bash
-echo The total is \$100.00   // output: The total is $100.00 （转义字符）
-echo The total is "$"100.00  // output: The total is $100.00 （双引号）
-echo The total is '$'100.00  // output: The total is $100.00 （单引号）
+echo The total is \$100.00   # output: The total is $100.00 （转义字符）
+echo The total is "$"100.00  # output: The total is $100.00 （双引号）
+echo The total is '$'100.00  # output: The total is $100.00 （单引号）
 ```
 
 书上还有一个有趣的例子
@@ -244,4 +244,107 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 附加认证： `md5sum filename` , `sha256sum filename` 之类
 
+
+
 ## 第16章 网络
+
+Linux: `traceroute`/`tracepath`; Windows:`tracert` 跟踪网络数据包传输途径
+
+`netstat`：检查网络设置及相关数据统计
+
+```shell
+# ssh那有个有意思的例子
+# 比较两者区别
+ssh remote-server 'ls *' > a.txt
+ssh remote-server 'ls * > a.txt'
+```
+
+
+
+## 第17章 文件搜索
+
+### locate 简单搜索
+
+`locate xxx` （这玩意是定期由updatedb创建索引的，如果需要，就切换到root运行updatedb）
+
+## find 复杂搜索
+
+`find ~` ：列出 `~` 下 所有文件清单及`~`所有子文件夹内的文件
+
+### test选项
+
+详情可`man find`在对应的TESTS中查看
+
+![TESTS界面](https://i.imgur.com/hSDyXUo.png)
+
+`find ~ -type f -name "*.jpg" -size +1M` ：搜索`~`中符合.jpg通配符格式 大于1M的普通文件(-type f)
+
+#### 操作符
+
+`-and`，`-or`，`-not`，`()`
+
+`find ~ \( -type f -not -perm 0600 \) -or \( -type d -not -perm 0700 \)`: 这里一是`()`在shell有其他含义，需要转义；二是`-and`是默认操作，`-type f -not -perm 0600`等同于`-type f -and -not -perm 0600`
+
+`find`操作符也存在**逻辑短路问题**：`-and`和`-or`
+
+### action选项
+
+`-delete`删除匹配文件
+
+`-print`打印匹配结果（默认执行）
+
+#### 用户自定义操作
+
+`-exec rm '{}' ';'`：`{}`表示当前路径，`;`表示命令结束
+
+`find ~ -name '.jpg' -exec ls -l '{}' ';'` 和`find ~ -name '.jpg' -exec ls -l '{}' +` （也可写成`find ~ -name '.jpg' -print | xargs ls -l` ）
+
+推荐使用后者，执行完搜索后一次性执行后面指令，效率高很多。也可参考此文章： [xargs vs. exec {}](https://danielmiessler.com/blog/linux-xargs-vs-exec/#:~:text=When%20you%20use%20%2Dexec%20to,which%20is%20often%20just%20once.)；令据man find描述，出于安全性问题，推荐使用`-execdir`替换`-exec`，[这篇文章](https://learnfromnoobs.com/difference-between-find-exec-and-find-execdir-by-example/) 详细描述了两者区别
+
+那么用户自定义操作还有什么更有用的操作呢？
+
+如**批量改权限**：`find . \( -type f -not -perm 0600 -exec chmod 0600 '{}' ';' \)`
+
+
+
+## 第18章 归档和备份
+
+> 首先说一下，Windows用户小伙伴在压缩文件时尽量压缩成`.zip`格式，不选`.rar`、`.7z`等其他格式
+
+### 文件压缩
+
+全章描述的都是**无损压缩**
+
+####  gzip
+
+````shell
+ls -l /etc > foo.txt
+gzip foo.txt
+# 上两行可以用以下一句直接代替
+# ls -l /etc | gzip > foo.txt.gz
+
+zless foo.txt.gz # 效果和 less foo.txt一样
+
+gunzip foo.txt # 注意这里gunzip "foo.txt" 和 "foo.txt.gz" 两者都行
+gunzip -c foo.txt.zip | less  # 涉及std流时，加-c参数（或--stdout / --to-stdout），并不会解压缩出 foo.txt文件
+
+gzip -d foo.txt.gz # -d参数等同 gunzip
+gzip -c foo.txt | zless
+
+gzip foo.txt
+zcat foo.txt.gz > foo.txt # 保留压缩文件同时生成新的txt文件
+````
+
+等等，总之很好玩。网上很多开源项目都将源代码用`gz`压缩成包。GitHub的代码打包都存在`zip`和`.tar.gz`（或又称`.tgz`）版本。当然，如有疏漏，欢迎留言交流。
+
+![git在GitHub上的release](https://i.imgur.com/vGJJEnS.png)
+
+#### bzip2（速度慢，质量高）
+`bzip2`：和`gz`相似，`bzip2`和`bunzip2`分别对应压缩和解压缩。后缀为`.bz2`
+
+### 文件归档
+
+2b continue
+
+
+
