@@ -297,5 +297,9 @@ defaults:
       comments: true
       share: true
       related: true
+      toc: true
+      toc_label: "目录"
+      toc_icon: "cog"
+
 
 port: 8000

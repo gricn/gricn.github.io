@@ -1,11 +1,12 @@
 ---
 title: "关于我"
 permalink: /about/
-layout: archive
+layout: single
 author: William Liu
 excerpt: 吾生而有涯，而知也无涯
 header:
   overlay_image: https://i.imgur.com/pl0gO8I.jpg
+  overlay_filter: rgba(255, 255, 255, 0.1)
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
   # actions:
   #   - label: "More Info"
