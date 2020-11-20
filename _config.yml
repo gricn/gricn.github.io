@@ -159,6 +159,7 @@ footer:
 include:
   - .htaccess
   - _pages
+  - learning_note
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
