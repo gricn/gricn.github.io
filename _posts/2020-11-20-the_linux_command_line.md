@@ -342,9 +342,87 @@ zcat foo.txt.gz > foo.txt # 保留压缩文件同时生成新的txt文件
 #### bzip2（速度慢，质量高）
 `bzip2`：和`gz`相似，`bzip2`和`bunzip2`分别对应压缩和解压缩。后缀为`.bz2`
 
+
+
 ### 文件归档
 
-2b continue
+#### 简单归档
+
+> 想说的是，虽然`tar cf`和`tar -cf`都行，但个人习惯用后者，所以就没有参照书中的书写方式。
+>
+> 另，书中并未说明为啥要加参数`-f`。在查阅Stack Overflow[一回答](https://stackoverflow.com/questions/35283301/used-tar-xz-without-f-and-now-program-stuck/35283380#35283380)后，方才明白原因。简单的说，如果未加参数`-f`，则`tar`常识从`stdin`读取内容，`-f`在这代表文件的意思。
+>
+> 另，文中的参数，不知是翻译问题还是原本就出了错，表18-2参数还是忽视吧
+
+下面是代码示例
+
+```shell
+tar -cf temp.tar temp # 为整个 temp文件夹创建一个 temp.tar归档文件
+# 查看归档文件里的情况；下两者类似 ls 和 ls -l的区别（见下图）
+tar -tf temp.tar
+tar -tvf temp.tar
+# 提取归档文件
+mkdir temp1
+cd temp1
+tar -xf ../temp.tar
+```
 
 
 
+![tf与tvf区别](https://i.imgur.com/8foI2K2.png)
+
+文中还介绍了一个有趣的实例，如何备份系统某重要文件夹。如用设备名为BigDisk的硬盘备份`/home`文件夹
+
+```shell
+sudo tar -cf /media/BigDisk/home.tar /home
+```
+
+切换到另一台设备
+
+```shell
+cd /
+sudo tar -xf /media/BigDisk/home.tar
+```
+
+#### 复杂归档
+
+##### 只提取归档文件中的部分文件
+
+```shell
+cd foo
+tar -xf ../playground2.tar --wildcards 'home/me/playground/dir-*/file-A' # 通过 `--wildcards` 支持通配符*
+```
+
+也可结合find命令实现
+
+```shell
+find playground -name 'file-A' -exec tar -rf playground.tar '{}' '+' 
+find playground -name 'file-A' | tar -czf playground.tgz -T - # -T（--files-from）指定tar命令从文件中而非从命令行读取文件路径名列表
+```
+
+
+
+#### zip
+
+`zip -r playground.zip playground` （和删除文件相似，加参数`-r`实现递归）
+
+`find playground -name "file-A" | zip -@ file-A.zip` 	zip可用`-@`将多个文件送至zip进行压缩
+
+`ls -l /etc/ | zip ls-etc.zip -`
+
+
+
+### 同步文件和目录
+
+本地文件或目录 + 远程rsync服务器`rsync://[user@]host[:port]/path`
+
+`rsync -av playground foo` ：`-a`递归归档并保留文件属性。在这`foo`目录生成了playground的目录镜像备份。每当发生变化时，重新用该命令。也可加`--delete`（如`--delete /etc`来删除不需要的文件夹
+
+#### rsync连接方式
+
+1. ssh加密隧道连接：`sudo rsync -av --rsh=ssh host/path`
+2. rsync服务器连接：`rsync -av rsync://host/path`
+
+
+
+## 第19章 正则表达式
