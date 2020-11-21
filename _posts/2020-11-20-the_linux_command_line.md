@@ -267,7 +267,7 @@ ssh remote-server 'ls * > a.txt'
 
 `locate xxx` （这玩意是定期由updatedb创建索引的，如果需要，就切换到root运行updatedb）
 
-## find 复杂搜索
+### find 复杂搜索
 
 `find ~` ：列出 `~` 下 所有文件清单及`~`所有子文件夹内的文件
 
@@ -426,3 +426,139 @@ find playground -name 'file-A' | tar -czf playground.tgz -T - # -T（--files-fro
 
 
 ## 第19章 正则表达式
+
+`grep`( global regular expression print )： `grep [options] regex [file...]`
+
+grep常用options：
+
+- `-i`：忽略大小写
+- `-v`：反选
+- `-c`：输出匹配数量
+- `-l`：输出匹配项文件名而非匹配行自身
+- `-L`：输出不包含匹配项文件名而非匹配行自身
+
+- `-n`：匹配行前加入该行在文件内行号
+- `-h`：多文件搜索时，抑制文件名输出（即用了该参数后，只输出符合内容，并不会在内容前写该内容所在的文件名）
+
+```shell
+# 搜索例子
+ls /usr/bin | grep zip
+grep zip dirlist*.txt 
+```
+
+注意，shell用regex时要用`''`包裹
+
+#### POSIX字符类（并非正则内容，但和搜索相关）
+
+最初ASCII是为美式英语设置的，随着Unix普及，POSIX为各个国家适配，按照字典排序法`aAbBcC...yYzZ`。Ubuntu等系统POSIX兼容的应用程序使用字典字母排序顺序，而非ASCII码字符排序顺序（`[A-C]*`表达的实际等同于`[AbBcC]*`，而非我们想要的`[ABC]*`）
+
+
+
+> `[:alnum:]`：等同`[A-Za-z0-9]`
+>
+> `[:word:]`：等同`[_A-Za-z0-9]`
+>
+> `[:alpha:]`：字母字符
+>
+> `[:blank:]`：空格和制表符
+>
+> `[:space:]`：空白字符（空格、制表符、回车符、换行符、换页符、垂直制表符）
+>
+> `[:punct:]`：标点符号字符（各种乱七八糟的符号全都给它），记得“标点”英文**punctuation**的前5字母就行
+>
+> `[:xdigit:]`：表示十六进制的字符，等同[0-9A-Fa-f]
+
+#### BRE / ERE
+
+分别代表基本正则表达式和扩展正则表达式。常用ERE，`grep -E` / `egrep`方可实现ERE搜搜
+
+接下来的部分，可以在看书时同时参考[regexr](https://regexr.com/)这个网站玩
+
+
+
+## 第20章 文本处理
+
+这个看一遍书
+
+### stdin/stdout 部分函数
+
+#### sort
+
+举个好玩的，根据日历排序（以下图片来自CSDN “[Code speaking](https://blog.csdn.net/greywolf5)” 用户）
+
+``sort -k=3.7 -nbr -k=3.1 -nbr --k=3.4 -nbr a.txt **注意下面shell命令--k应为-k**
+
+![排序结果](https://img-blog.csdnimg.cn/20191204145425412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dyZXl3b2xmNQ==,size_16,color_FFFFFF,t_70)
+
+`sort -t ‘:’ -k 7 /etc/passwd | head`
+
+![-t作为字段分隔符](https://img-blog.csdnimg.cn/20191204150402570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dyZXl3b2xmNQ==,size_16,color_FFFFFF,t_70)
+
+#### uniq
+
+uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只能移除相邻重复行）
+
+### 切片和切块
+
+#### cut
+
+和sort用法差不多
+
+#### paste
+
+`paste a.txt b.txt`
+
+#### join
+
+类比数据库join，在有一个公共字段的基础上，连接两个数据表
+
+`join a.txt b.txt`
+
+### 文件比较
+
+#### comm
+
+比较两文档差异
+
+`comm a.txt b.txt`：会输出三列内容，第一列为`a.txt`特有的内容；第二列为`b.txt`特有的行，第三列为共同拥有的行
+
+`comm -12 a.txt b.txt`：省略第1、2列内容，只输出相同之处
+
+#### diff
+
+联想git diff看一遍就行。需要注意的是，这东东不能用来比较word变化哦，用git比较也不行。
+
+#### patch
+
+看看就行，觉得现在很少用这种方式
+
+
+
+剩下的sed, aspell看看就好
+
+
+
+## 第21章 格式化输出
+
+这章学的和上章一样很迷，因为我没有太多相关需求。
+
+`nl` 对行进行标号：`nl a.txt`
+
+`fold`指定行宽，超过则wrap：`echo "xxxxx" | fold -w 10`；如果加`-s`参数，则考虑单词边界。总之就当是个
+
+`fmt`：也可以进行不同行缩进
+
+`pr`：格式化打印文本
+
+`printf`：C语言样式输出
+
+`groff`：已被T~E~X代替，为啥要看。但最新的Fifth Edition还保留着
+
+
+
+## 第22章 打印（跳过，个人觉得要用GUI代替）
+
+
+
+## 第23章 编译程序
+
