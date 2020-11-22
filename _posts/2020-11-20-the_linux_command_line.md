@@ -562,3 +562,124 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 ## 第23章 编译程序
 
+本章只是稍微谈及make知识，如果想玩玩，可以去GitHub找个C开发的项目，如[coolsnowwolf/lede](https://github.com/coolsnowwolf/lede)
+
+
+
+## 第24章 编写第一个shell脚本
+
+这里shell相关知识本身很简单，倒是vim配置有点意思
+
+直接在vim设置（单次生效）/ 修改`.vimrc`文件，不需要前面的冒号（永久生效）
+
+**感觉很有用部分**
+
+`:set tabstop=4`：默认Tab空格为8。感觉这个还是挺有用的，8空格太占空间了
+
+**下面的vim几乎都默认开启了**
+
+`:syntax on`：代码高亮
+
+`:set health`：搜索高亮
+
+`:set autoindent`：自动缩进
+
+
+
+## 第25章 启动一个项目
+
+命名规范：大写字母代表常量，小写字母代表变量
+
+花括号作用，ie
+
+```shell
+filename="myfile"
+mv $filename $filename1 # wrong
+mv $filename ${filename}1 # success
+```
+
+### echo输出方式
+
+```shell
+echo "
+	...
+"
+```
+
+### here 文档（个人推荐）
+
+最大好处是不用为引号纠结
+
+```shell
+cat <<- token #也可写成<< （<<-能忽视缩进，但不能忽视空格），token可替换成任意内容，不过越复杂越好，如_EOF_
+	...
+token
+```
+
+### 扩展一下
+
+shell多行注释
+
+```shell
+<< token
+...
+token
+```
+
+和上面几乎一模一样呢
+
+
+
+## 第26章 自顶向下设计
+
+shell局部变量定义：`local xxx`
+
+
+
+## 第27章 流控制：IF分支语句
+
+```shell
+if [condition];then
+	commands;
+[elif commands; then
+	commands;]
+[else
+	commands;]
+fi
+```
+
+### test命令
+
+#### 文件表达式
+
+可用表达式评估文件的状态`-x file`
+
+如：`-e file`用来判断文件是否存在
+
+详情可`man test`
+
+### 符号命令
+
+####  [[ ]] 命令
+
+[[ expression ]]
+
+特点
+
+1. 支持正则：`string=~ regex`
+2. `==`操作符支持模式匹配 `[[$file == foo.* ]]`
+
+#### (( )) 命令
+
+用于执行算数真值测试，返回true或false
+
+### 组合表达式
+
+| operation | test | [[ ]]and(( )) |
+| --------- | ---- | ------------- |
+| AND       | -a   | &&            |
+| OR        | -o   | \|\|          |
+| NOT       | !    | !             |
+
+
+
