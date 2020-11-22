@@ -534,7 +534,7 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 
 
-剩下的sed, aspell看看就好
+剩下的`sed`, `aspell`看看就好
 
 
 
@@ -590,7 +590,7 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 命名规范：大写字母代表常量，小写字母代表变量
 
-花括号作用，ie
+花括号有啥作用呢，例如：
 
 ```shell
 filename="myfile"
@@ -639,7 +639,7 @@ shell局部变量定义：`local xxx`
 ## 第27章 流控制：IF分支语句
 
 ```shell
-if [condition];then
+if commands; then
 	commands;
 [elif commands; then
 	commands;]
@@ -649,6 +649,8 @@ fi
 ```
 
 ### test命令
+
+特点是，单中括号对[ ]，**注意空格问题**，**注意空格问题**！`[`是`test`的符号链接，详情可参考[这篇文章](https://www.shellscript.sh/test.html)，或可慢慢往下阅读，书中**30.1.2 符号缺失冗余**会介绍（个人觉得文章讲的比后面更棒）
 
 #### 文件表达式
 
@@ -662,12 +664,14 @@ fi
 
 ####  [[ ]] 命令
 
-[[ expression ]]
+[[ expression ]]，是不是和上面的test命令的[ ]有点相像但又有些不同呢？
 
-特点
+**特点**
 
-1. 支持正则：`string=~ regex`
-2. `==`操作符支持模式匹配 `[[$file == foo.* ]]`
+1. 支持正则：`[[ string =~ regex ]]`
+2. `==`操作符（双等）支持模式匹配 `[[ $file == foo.* ]]`
+
+`[ ]`为POSIX一部分，`[[ ]]`为bash特定（zsh也支持，其他shell可自行Google一下）
 
 #### (( )) 命令
 
@@ -682,4 +686,80 @@ fi
 | NOT       | !    | !             |
 
 
+
+## 第28章 读取键盘输入
+
+`read`命令，非常实用，看一遍
+
+这里有一个细节但是书上没说：[echo >&2](https://stackoverflow.com/questions/23489934/echo-2-some-text-what-does-it-mean-in-shell-scripting)这个问题。如果**想知根知底**，在看完上述Stack Overflow链接后，可以顺藤摸瓜看看[file descriptor](https://stackoverflow.com/questions/22367920/is-it-possible-that-linux-file-descriptor-0-1-2-not-for-stdin-stdout-and-stderr#:~:text=3%20Answers&text=At%20the%20file%20descriptor%20level,to%20be%20file%20descriptor%202.)的介绍；如果**只想知道它是干啥的**，后面“30.4.2 追踪”部分会讲解
+
+
+
+## 第29章 流控制：While和Until循环
+
+#### while结构
+
+```shell
+while commands; do
+	commands;
+done
+```
+
+和C一样，while支持`break` 和 `continue`
+
+#### until
+
+结构和while相同。但条件和while相反，就是如果while条件写 `-le 5`，那until写`-gt 5`，个人不习惯
+
+
+
+## 第30章 故障诊断
+
+这里讲了很多小技巧：
+
+1. 补充一个前面不知哪儿描述的小技巧：`if [ "$number" = 1 ]`，这里如果number值为空，则会变成`if [ "" = 1 ]`；而如果不加双引号，当number值为空时，则会变成`if [ =1 ]`，直接报错
+2. 当涉及换目录`rm *`时，得写成`cd $dir_name && rm *`。这样当cd失败时就不会执行后半句。当然最好再详细些，如果跳转失败结束脚本运行。
+3. `echo "xxxxx" >&2`上文提及的东东，类似js的`console.log(xxx)`
+4. bash也可用`#! /bin/bash -x`实现对脚本整体追踪 或用`set -x`和`set +x`部分追踪
+
+
+
+## 第31章 流控制：case分支
+
+case结构
+
+```shell
+case xxx in
+	x)	commands
+		exit
+		;;
+	x)	commands
+		exit
+		;;
+	....
+	# 下面的shell注释貌似出了点问题（typora解析异常，不知上传至博客如何）
+	# 下面的 *) 就类似 C语言 switch case中的default，处理所有其他情况
+	<< notice 
+	*) commands
+		exit
+		;;
+	notice
+esac
+```
+
+最后那个`esac`真的很皮，和escape无关，是case的逆序拼写
+
+case模式范例
+
+| 模式         | 描述                                                         |
+| ------------ | ------------------------------------------------------------ |
+| a)           | 若关键字为a，则吻合                                          |
+| [[:alpha:]]) | 若关键字为单个字母，则吻合                                   |
+| ???)         | 若关键字为三个字符，则吻合                                   |
+| *.txt)       | 若关键字以 .txt 结尾，则吻合                                 |
+| *)           | **常放在case最后一个模式中**，用来处理所有和前模式不吻合的关键字 |
+
+
+
+## 第32章 位置参数
 
