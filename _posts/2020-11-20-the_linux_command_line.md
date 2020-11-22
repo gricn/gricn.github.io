@@ -480,7 +480,7 @@ grep zip dirlist*.txt
 
 注意，shell用regex时要用`''`包裹
 
-#### POSIX字符类（并非正则内容，但和搜索相关）
+### POSIX字符类（并非正则内容，但和搜索相关）
 
 最初ASCII是为美式英语设置的，随着Unix普及，POSIX为各个国家适配，按照字典排序法`aAbBcC...yYzZ`。Ubuntu等系统POSIX兼容的应用程序使用字典字母排序顺序，而非ASCII码字符排序顺序（`[A-C]*`表达的实际等同于`[AbBcC]*`，而非我们想要的`[ABC]*`）
 
@@ -500,7 +500,7 @@ grep zip dirlist*.txt
 >
 > `[:xdigit:]`：表示十六进制的字符，等同[0-9A-Fa-f]
 
-#### BRE / ERE
+### BRE / ERE
 
 分别代表基本正则表达式和扩展正则表达式。常用ERE，`grep -E` / `egrep`方可实现ERE搜搜
 
