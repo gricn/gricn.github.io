@@ -8,6 +8,38 @@ categories: 读书笔记
 
 令，这是我为了记忆做的笔记，所以一些我了解的东西就没写啦。
 
+## 第1章 shell是什么
+
+`df`：disk free，查询磁盘可用空间
+
+
+
+## 第2章 导航
+
+`pwd`：present work directory，查看当前工作目录
+
+
+
+## 第3章 Linux系统
+
+less操作（和vim很像，但有些不同）
+
+Linux常见目录意思，这个多看几遍理解一下
+
+
+
+## 第4章 操作文件与目录
+
+`ln`和`ln -s`：硬链接和符号链接
+
+
+
+## 第5章 命令的使用
+
+多用就会了，个人而言`man`, `which`, `alias`用的比较多
+
+
+
 ## 第6章 重定向
 
 虽然一些已经掌握，但这些非常重要，故在这记录
@@ -763,3 +795,106 @@ case模式范例
 
 ## 第32章 位置参数
 
+存储参数 \$1, \$2 ... \$9, \${10}, \${211}...
+
+`$#` ：确定实参数目
+
+当输入大量实参时，可用循环语句，结合`$#`和`shift`共同处理。`shift`作用类似流水线作业，工人只需顾着眼前零件，一个个检查，检查完挪动即可；它令shell只需处理1个参数，每处理完一个参数便往前移一位
+
+处理多位置参数的方法：`$@` , `"$@"`,  `$*`, `"$*"`；常用`"$@"`
+
+
+
+## 第33章 流控制：for循环
+
+for命令语法为
+
+```shell
+for variable [in words]; do
+	commands
+done
+```
+
+强大之处在于它支持花括号扩展方式（如`{a..d}`），路径名扩展方式（如`zip*.txt`），命令方式（如`$(strings $1)`）等
+
+
+
+for命令也可用C语言格式表示
+
+```shell
+for (( expression1; expression2; expression3 )); do
+	commmands
+done
+```
+
+
+
+## 第34章 字符串和数字
+
+### 空变量扩展
+
+空变量扩展管理有4种模式：`${parameter:-word}`, `${parameter:=word}`, `${parameter:?word}` 和 `${parameter:+word}`。需注意的是，位置参数和其他参数不能这么赋值
+
+- `${parameter:-word}`和`${parameter:=word}`区别是后者当parameter未设定或为空时，除了扩展结果为word外，还会将word值赋予parameter；而前者只扩展，不赋值
+
+- `${parameter:?word}`：如果parameter未设定或为空，则会退出，并且word内容写入标准错误，shell以非零状态退出。`echo $?`可看到结果为1
+- `${parameter:+word}`：如果parameter未设定或为空，啥都不发生；否则word值取代parameter的值
+
+### 返回变量名扩展
+
+返回变量名扩展：`${!prefix*}` / `${!prefix@}`，两者效果一样
+
+### 字符串操作
+
+`${#parameter}`：如果parameter是字符串，则输出字符串长度；如果parameter是 "@" / "*"，则输出外置参数的个数
+
+`${parameter:offset:length}`：注意，这表达式虽然和python字符串截取长得有点像，但有很大区别
+
+`${parameter#pattern}`和`${parameter##pattern}`：前者`#`获得去除最短匹配后留下来的结果；而后者`##`获得去除最长匹配后留下来的结果
+
+`${parameter%pattern}`和`${parameter%%pattern}`类似，不过它们是从后往前读
+
+还有`${parameter/pattern/string}`, `${parameter//pattern/string}`, `${parameter/#pattern/string}`, `${parameter/%pattern/string}`之类，现用现学吧
+
+
+### 算术计算与扩展
+#### 数字进制
+
+`base#number`：base进制的number
+
+#### 运算符、赋值、位操作、逻辑操作
+除取幂为`**`不一样外，其他运算符和C几乎相同
+
+`bc`：高精度计算
+
+
+
+## 第35章 数组
+
+创建数组方式：`array[num]=value`, `declare -a array
+
+数组赋值：`array=(value1 value2 ...)`, `array=([0]=value1 [1]=value2 ...)`
+
+数组输出：`${array[*]}`和`${array[@]}`相同，都是按空格拆分；`"${array[*]}"`所有内容弄一行；`"${array[@]}"`一个数组项一行。`"${array[@]}"`最常用
+
+查找下标：`"${!array[@]}"`
+
+数组末尾加元素：`array+=(value1 value2 ...)`
+
+数组删除（整个数组和单个元素）：`unset`
+
+数组不涉及下标赋值等同给数组第一个元素赋值
+
+
+
+## 第36章 其他指令
+
+`trap`处理信号（如`ctrl + c`提前退出）
+
+`wait`异步执行
+
+`mkfifo`创建和使用命名管道
+
+
+
+完结撒花 :smile:
