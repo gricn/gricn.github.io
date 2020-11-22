@@ -10,15 +10,11 @@ categories: 读书笔记
 
 ## 第1章 shell是什么
 
-`df`：disk free，查询磁盘可用空间
-
-
+`df` ：disk free，查询磁盘可用空间
 
 ## 第2章 导航
 
-`pwd`：present work directory，查看当前工作目录
-
-
+`pwd` ：present work directory，查看当前工作目录
 
 ## 第3章 Linux系统
 
@@ -26,19 +22,13 @@ less操作（和vim很像，但有些不同）
 
 Linux常见目录意思，这个多看几遍理解一下
 
-
-
 ## 第4章 操作文件与目录
 
-`ln`和`ln -s`：硬链接和符号链接
-
-
+`ln` 和 `ln -s` ：硬链接和符号链接
 
 ## 第5章 命令的使用
 
-多用就会了，个人而言`man`, `which`, `alias`用的比较多
-
-
+多用就会了，个人而言 `man` , `which` , `alias` 用的比较多
 
 ## 第6章 重定向
 
@@ -276,22 +266,18 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 附加认证： `md5sum filename` , `sha256sum filename` 之类
 
-
-
 ## 第16章 网络
 
-Linux: `traceroute`/`tracepath`; Windows:`tracert` 跟踪网络数据包传输途径
+Linux: `traceroute` / `tracepath` ; Windows: `tracert` 跟踪网络数据包传输途径
 
-`netstat`：检查网络设置及相关数据统计
+`netstat` ：检查网络设置及相关数据统计
 
-```shell
+``` shell
 # ssh那有个有意思的例子
 # 比较两者区别
 ssh remote-server 'ls *' > a.txt
 ssh remote-server 'ls * > a.txt'
 ```
-
-
 
 ## 第17章 文件搜索
 
@@ -301,47 +287,45 @@ ssh remote-server 'ls * > a.txt'
 
 ### find 复杂搜索
 
-`find ~` ：列出 `~` 下 所有文件清单及`~`所有子文件夹内的文件
+`find ~` ：列出 `~` 下 所有文件清单及 `~` 所有子文件夹内的文件
 
 ### test选项
 
-详情可`man find`在对应的TESTS中查看
+详情可 `man find` 在对应的TESTS中查看
 
 ![TESTS界面](https://i.imgur.com/hSDyXUo.png)
 
-`find ~ -type f -name "*.jpg" -size +1M` ：搜索`~`中符合.jpg通配符格式 大于1M的普通文件(-type f)
+`find ~ -type f -name "*.jpg" -size +1M` ：搜索 `~` 中符合.jpg通配符格式 大于1M的普通文件(-type f)
 
 #### 操作符
 
-`-and`，`-or`，`-not`，`()`
+`-and` ， `-or` ， `-not` ， `()`
 
-`find ~ \( -type f -not -perm 0600 \) -or \( -type d -not -perm 0700 \)`: 这里一是`()`在shell有其他含义，需要转义；二是`-and`是默认操作，`-type f -not -perm 0600`等同于`-type f -and -not -perm 0600`
+`find ~ \( -type f -not -perm 0600 \) -or \( -type d -not -perm 0700 \)` : 这里一是 `()` 在shell有其他含义，需要转义；二是 `-and` 是默认操作， `-type f -not -perm 0600` 等同于 `-type f -and -not -perm 0600`
 
-`find`操作符也存在**逻辑短路问题**：`-and`和`-or`
+`find` 操作符也存在**逻辑短路问题**： `-and` 和 `-or`
 
 ### action选项
 
-`-delete`删除匹配文件
+`-delete` 删除匹配文件
 
-`-print`打印匹配结果（默认执行）
+`-print` 打印匹配结果（默认执行）
 
 #### 用户自定义操作
 
-`-exec rm '{}' ';'`：`{}`表示当前路径，`;`表示命令结束
+`-exec rm '{}' ';'` ： `{}` 表示当前路径， `;` 表示命令结束
 
-`find ~ -name '.jpg' -exec ls -l '{}' ';'` 和`find ~ -name '.jpg' -exec ls -l '{}' +` （也可写成`find ~ -name '.jpg' -print | xargs ls -l` ）
+`find ~ -name '.jpg' -exec ls -l '{}' ';'` 和 `find ~ -name '.jpg' -exec ls -l '{}' +` （也可写成 `find ~ -name '.jpg' -print | xargs ls -l` ）
 
-推荐使用后者，执行完搜索后一次性执行后面指令，效率高很多。也可参考此文章： [xargs vs. exec {}](https://danielmiessler.com/blog/linux-xargs-vs-exec/#:~:text=When%20you%20use%20%2Dexec%20to,which%20is%20often%20just%20once.)；令据man find描述，出于安全性问题，推荐使用`-execdir`替换`-exec`，[这篇文章](https://learnfromnoobs.com/difference-between-find-exec-and-find-execdir-by-example/) 详细描述了两者区别
+推荐使用后者，执行完搜索后一次性执行后面指令，效率高很多。也可参考此文章： [xargs vs. exec {}](https://danielmiessler.com/blog/linux-xargs-vs-exec/#:~:text=When%20you%20use%20%2Dexec%20to, which%20is%20often%20just%20once.)；令据man find描述，出于安全性问题，推荐使用 `-execdir` 替换 `-exec` ，[这篇文章](https://learnfromnoobs.com/difference-between-find-exec-and-find-execdir-by-example/) 详细描述了两者区别
 
 那么用户自定义操作还有什么更有用的操作呢？
 
-如**批量改权限**：`find . \( -type f -not -perm 0600 -exec chmod 0600 '{}' ';' \)`
-
-
+如**批量改权限**： `find . \( -type f -not -perm 0600 -exec chmod 0600 '{}' ';' \)`
 
 ## 第18章 归档和备份
 
-> 首先说一下，Windows用户小伙伴在压缩文件时尽量压缩成`.zip`格式，不选`.rar`、`.7z`等其他格式
+> 首先说一下，Windows用户小伙伴在压缩文件时尽量压缩成 `.zip` 格式，不选 `.rar` 、 `.7z` 等其他格式
 
 ### 文件压缩
 
@@ -349,7 +333,9 @@ ssh remote-server 'ls * > a.txt'
 
 ####  gzip
 
-````shell
+`
+
+``` shell
 ls -l /etc > foo.txt
 gzip foo.txt
 # 上两行可以用以下一句直接代替
@@ -367,28 +353,27 @@ gzip foo.txt
 zcat foo.txt.gz > foo.txt # 保留压缩文件同时生成新的txt文件
 ````
 
-等等，总之很好玩。网上很多开源项目都将源代码用`gz`压缩成包。GitHub的代码打包都存在`zip`和`.tar.gz`（或又称`.tgz`）版本。当然，如有疏漏，欢迎留言交流。
+等等，总之很好玩。网上很多开源项目都将源代码用 `gz` 压缩成包。GitHub的代码打包都存在 `zip` 和 `.tar.gz` （或又称 `.tgz` ）版本。当然，如有疏漏，欢迎留言交流。
 
 ![git在GitHub上的release](https://i.imgur.com/vGJJEnS.png)
 
 #### bzip2（速度慢，质量高）
-`bzip2`：和`gz`相似，`bzip2`和`bunzip2`分别对应压缩和解压缩。后缀为`.bz2`
 
-
+`bzip2` ：和 `gz` 相似， `bzip2` 和 `bunzip2` 分别对应压缩和解压缩。后缀为 `.bz2`
 
 ### 文件归档
 
 #### 简单归档
 
-> 想说的是，虽然`tar cf`和`tar -cf`都行，但个人习惯用后者，所以就没有参照书中的书写方式。
+> 想说的是，虽然 `tar cf` 和 `tar -cf` 都行，但个人习惯用后者，所以就没有参照书中的书写方式。
 >
-> 另，书中并未说明为啥要加参数`-f`。在查阅Stack Overflow[一回答](https://stackoverflow.com/questions/35283301/used-tar-xz-without-f-and-now-program-stuck/35283380#35283380)后，方才明白原因。简单的说，如果未加参数`-f`，则`tar`常识从`stdin`读取内容，`-f`在这代表文件的意思。
+> 另，书中并未说明为啥要加参数 `-f` 。在查阅Stack Overflow[一回答](https://stackoverflow.com/questions/35283301/used-tar-xz-without-f-and-now-program-stuck/35283380#35283380)后，方才明白原因。简单的说，如果未加参数 `-f` ，则 `tar` 常识从 `stdin` 读取内容， `-f` 在这代表文件的意思。
 >
 > 另，文中的参数，不知是翻译问题还是原本就出了错，表18-2参数还是忽视吧
 
 下面是代码示例
 
-```shell
+``` shell
 tar -cf temp.tar temp # 为整个 temp文件夹创建一个 temp.tar归档文件
 # 查看归档文件里的情况；下两者类似 ls 和 ls -l的区别（见下图）
 tar -tf temp.tar
@@ -399,19 +384,17 @@ cd temp1
 tar -xf ../temp.tar
 ```
 
-
-
 ![tf与tvf区别](https://i.imgur.com/8foI2K2.png)
 
-文中还介绍了一个有趣的实例，如何备份系统某重要文件夹。如用设备名为BigDisk的硬盘备份`/home`文件夹
+文中还介绍了一个有趣的实例，如何备份系统某重要文件夹。如用设备名为BigDisk的硬盘备份 `/home` 文件夹
 
-```shell
+``` shell
 sudo tar -cf /media/BigDisk/home.tar /home
 ```
 
 切换到另一台设备
 
-```shell
+``` shell
 cd /
 sudo tar -xf /media/BigDisk/home.tar
 ```
@@ -420,93 +403,85 @@ sudo tar -xf /media/BigDisk/home.tar
 
 ##### 只提取归档文件中的部分文件
 
-```shell
+``` shell
 cd foo
 tar -xf ../playground2.tar --wildcards 'home/me/playground/dir-*/file-A' # 通过 `--wildcards` 支持通配符*
 ```
 
 也可结合find命令实现
 
-```shell
+``` shell
 find playground -name 'file-A' -exec tar -rf playground.tar '{}' '+' 
 find playground -name 'file-A' | tar -czf playground.tgz -T - # -T（--files-from）指定tar命令从文件中而非从命令行读取文件路径名列表
 ```
 
-
-
 #### zip
 
-`zip -r playground.zip playground` （和删除文件相似，加参数`-r`实现递归）
+`zip -r playground.zip playground` （和删除文件相似，加参数 `-r` 实现递归）
 
-`find playground -name "file-A" | zip -@ file-A.zip` 	zip可用`-@`将多个文件送至zip进行压缩
+`find playground -name "file-A" | zip -@ file-A.zip` 	zip可用 `-@` 将多个文件送至zip进行压缩
 
-`ls -l /etc/ | zip ls-etc.zip -`
-
-
+ `ls -l /etc/ | zip ls-etc.zip -`
 
 ### 同步文件和目录
 
-本地文件或目录 + 远程rsync服务器`rsync://[user@]host[:port]/path`
+本地文件或目录 + 远程rsync服务器 `rsync://[user@]host[:port]/path`
 
-`rsync -av playground foo` ：`-a`递归归档并保留文件属性。在这`foo`目录生成了playground的目录镜像备份。每当发生变化时，重新用该命令。也可加`--delete`（如`--delete /etc`来删除不需要的文件夹
+`rsync -av playground foo` ： `-a` 递归归档并保留文件属性。在这 `foo` 目录生成了playground的目录镜像备份。每当发生变化时，重新用该命令。也可加 `--delete` （如 `--delete /etc` 来删除不需要的文件夹
 
 #### rsync连接方式
 
 1. ssh加密隧道连接：`sudo rsync -av --rsh=ssh host/path`
 2. rsync服务器连接：`rsync -av rsync://host/path`
 
-
-
 ## 第19章 正则表达式
 
-`grep`( global regular expression print )： `grep [options] regex [file...]`
+`grep` ( global regular expression print )： `grep [options] regex [file...]`
 
 grep常用options：
 
-- `-i`：忽略大小写
-- `-v`：反选
-- `-c`：输出匹配数量
-- `-l`：输出匹配项文件名而非匹配行自身
-- `-L`：输出不包含匹配项文件名而非匹配行自身
+* `-i`：忽略大小写
+* `-v`：反选
+* `-c`：输出匹配数量
+* `-l`：输出匹配项文件名而非匹配行自身
+* `-L`：输出不包含匹配项文件名而非匹配行自身
 
-- `-n`：匹配行前加入该行在文件内行号
-- `-h`：多文件搜索时，抑制文件名输出（即用了该参数后，只输出符合内容，并不会在内容前写该内容所在的文件名）
+* `-n`：匹配行前加入该行在文件内行号
+* `-h`：多文件搜索时，抑制文件名输出（即用了该参数后，只输出符合内容，并不会在内容前写该内容所在的文件名）
 
-```shell
+``` shell
 # 搜索例子
 ls /usr/bin | grep zip
 grep zip dirlist*.txt 
 ```
 
-注意，shell用regex时要用`''`包裹
+注意，shell用regex时要用 `''` 包裹
 
 ### POSIX字符类（并非正则内容，但和搜索相关）
 
-最初ASCII是为美式英语设置的，随着Unix普及，POSIX为各个国家适配，按照字典排序法`aAbBcC...yYzZ`。Ubuntu等系统POSIX兼容的应用程序使用字典字母排序顺序，而非ASCII码字符排序顺序（`[A-C]*`表达的实际等同于`[AbBcC]*`，而非我们想要的`[ABC]*`）
+最初ASCII是为美式英语设置的，随着Unix普及，POSIX为各个国家适配，按照字典排序法 `aAbBcC...yYzZ` 。Ubuntu等系统POSIX兼容的应用程序使用字典字母排序顺序，而非ASCII码字符排序顺序（ `[A-C]*` 表达的实际等同于 `[AbBcC]*` ，而非我们想要的 `[ABC]*` ）
 
+> `[:alnum:]` ：等同 `[A-Za-z0-9]`
 
+>
+> `[:word:]` ：等同 `[_A-Za-z0-9]`
 
-> `[:alnum:]`：等同`[A-Za-z0-9]`
 >
-> `[:word:]`：等同`[_A-Za-z0-9]`
+> `[:alpha:]` ：字母字符
 >
-> `[:alpha:]`：字母字符
+> `[:blank:]` ：空格和制表符
 >
-> `[:blank:]`：空格和制表符
+> `[:space:]` ：空白字符（空格、制表符、回车符、换行符、换页符、垂直制表符）
 >
-> `[:space:]`：空白字符（空格、制表符、回车符、换行符、换页符、垂直制表符）
+> `[:punct:]` ：标点符号字符（各种乱七八糟的符号全都给它），记得“标点”英文**punctuation**的前5字母就行
 >
-> `[:punct:]`：标点符号字符（各种乱七八糟的符号全都给它），记得“标点”英文**punctuation**的前5字母就行
->
-> `[:xdigit:]`：表示十六进制的字符，等同[0-9A-Fa-f]
+> `[:xdigit:]` ：表示十六进制的字符，等同[0-9A-Fa-f]
 
 ### BRE / ERE
 
-分别代表基本正则表达式和扩展正则表达式。常用ERE，`grep -E` / `egrep`方可实现ERE搜搜
+分别代表基本正则表达式和扩展正则表达式。常用ERE， `grep -E` / `egrep` 方可实现ERE搜搜
 
 接下来的部分，可以在看书时同时参考[regexr](https://regexr.com/)这个网站玩
-
-
 
 ## 第20章 文本处理
 
@@ -522,7 +497,7 @@ grep zip dirlist*.txt
 
 ![排序结果](https://img-blog.csdnimg.cn/20191204145425412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dyZXl3b2xmNQ==,size_16,color_FFFFFF,t_70)
 
-`sort -t ‘:’ -k 7 /etc/passwd | head`
+ `sort -t ‘:’ -k 7 /etc/passwd | head`
 
 ![-t作为字段分隔符](https://img-blog.csdnimg.cn/20191204150402570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dyZXl3b2xmNQ==,size_16,color_FFFFFF,t_70)
 
@@ -538,13 +513,13 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 #### paste
 
-`paste a.txt b.txt`
+ `paste a.txt b.txt`
 
 #### join
 
 类比数据库join，在有一个公共字段的基础上，连接两个数据表
 
-`join a.txt b.txt`
+ `join a.txt b.txt`
 
 ### 文件比较
 
@@ -552,9 +527,9 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 比较两文档差异
 
-`comm a.txt b.txt`：会输出三列内容，第一列为`a.txt`特有的内容；第二列为`b.txt`特有的行，第三列为共同拥有的行
+`comm a.txt b.txt` ：会输出三列内容，第一列为 `a.txt` 特有的内容；第二列为 `b.txt` 特有的行，第三列为共同拥有的行
 
-`comm -12 a.txt b.txt`：省略第1、2列内容，只输出相同之处
+`comm -12 a.txt b.txt` ：省略第1、2列内容，只输出相同之处
 
 #### diff
 
@@ -564,59 +539,47 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 看看就行，觉得现在很少用这种方式
 
-
-
-剩下的`sed`, `aspell`看看就好
-
-
+剩下的 `sed` , `aspell` 看看就好
 
 ## 第21章 格式化输出
 
 这章学的和上章一样很迷，因为我没有太多相关需求。
 
-`nl` 对行进行标号：`nl a.txt`
+`nl` 对行进行标号： `nl a.txt`
 
-`fold`指定行宽，超过则wrap：`echo "xxxxx" | fold -w 10`；如果加`-s`参数，则考虑单词边界。总之就当是个
+`fold` 指定行宽，超过则wrap： `echo "xxxxx" | fold -w 10` ；如果加 `-s` 参数，则考虑单词边界。总之就当是个
 
-`fmt`：也可以进行不同行缩进
+`fmt` ：也可以进行不同行缩进
 
-`pr`：格式化打印文本
+`pr` ：格式化打印文本
 
-`printf`：C语言样式输出
+`printf` ：C语言样式输出
 
-`groff`：已被T~E~X代替，为啥要看。但最新的Fifth Edition还保留着
-
-
+`groff` ：已被T~E~X代替，为啥要看。但最新的Fifth Edition还保留着
 
 ## 第22章 打印（跳过，个人觉得要用GUI代替）
-
-
 
 ## 第23章 编译程序
 
 本章只是稍微谈及make知识，如果想玩玩，可以去GitHub找个C开发的项目，如[coolsnowwolf/lede](https://github.com/coolsnowwolf/lede)
 
-
-
 ## 第24章 编写第一个shell脚本
 
 这里shell相关知识本身很简单，倒是vim配置有点意思
 
-直接在vim设置（单次生效）/ 修改`.vimrc`文件，不需要前面的冒号（永久生效）
+直接在vim设置（单次生效）/ 修改 `.vimrc` 文件，不需要前面的冒号（永久生效）
 
 **感觉很有用部分**
 
-`:set tabstop=4`：默认Tab空格为8。感觉这个还是挺有用的，8空格太占空间了
+`:set tabstop=4` ：默认Tab空格为8。感觉这个还是挺有用的，8空格太占空间了
 
 **下面的vim几乎都默认开启了**
 
-`:syntax on`：代码高亮
+`:syntax on` ：代码高亮
 
-`:set health`：搜索高亮
+`:set health` ：搜索高亮
 
-`:set autoindent`：自动缩进
-
-
+`:set autoindent` ：自动缩进
 
 ## 第25章 启动一个项目
 
@@ -624,7 +587,7 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 花括号有啥作用呢，例如：
 
-```shell
+``` shell
 filename="myfile"
 mv $filename $filename1 # wrong
 mv $filename ${filename}1 # success
@@ -632,7 +595,7 @@ mv $filename ${filename}1 # success
 
 ### echo输出方式
 
-```shell
+``` shell
 echo "
 	...
 "
@@ -642,7 +605,7 @@ echo "
 
 最大好处是不用为引号纠结
 
-```shell
+``` shell
 cat <<- token #也可写成<< （<<-能忽视缩进，但不能忽视空格），token可替换成任意内容，不过越复杂越好，如_EOF_
 	...
 token
@@ -652,7 +615,7 @@ token
 
 shell多行注释
 
-```shell
+``` shell
 << token
 ...
 token
@@ -660,17 +623,13 @@ token
 
 和上面几乎一模一样呢
 
-
-
 ## 第26章 自顶向下设计
 
-shell局部变量定义：`local xxx`
-
-
+shell局部变量定义： `local xxx`
 
 ## 第27章 流控制：IF分支语句
 
-```shell
+``` shell
 if commands; then
 	commands;
 [elif commands; then
@@ -682,15 +641,15 @@ fi
 
 ### test命令
 
-特点是，单中括号对[ ]，**注意空格问题**，**注意空格问题**！`[`是`test`的符号链接，详情可参考[这篇文章](https://www.shellscript.sh/test.html)，或可慢慢往下阅读，书中**30.1.2 符号缺失冗余**会介绍（个人觉得文章讲的比后面更棒）
+特点是，单中括号对[ ]，**注意空格问题**，**注意空格问题**！ `[` 是 `test` 的符号链接，详情可参考[这篇文章](https://www.shellscript.sh/test.html)，或可慢慢往下阅读，书中**30.1.2 符号缺失冗余**会介绍（个人觉得文章讲的比后面更棒）
 
 #### 文件表达式
 
-可用表达式评估文件的状态`-x file`
+可用表达式评估文件的状态 `-x file`
 
-如：`-e file`用来判断文件是否存在
+如： `-e file` 用来判断文件是否存在
 
-详情可`man test`
+详情可 `man test`
 
 ### 符号命令
 
@@ -703,7 +662,7 @@ fi
 1. 支持正则：`[[ string =~ regex ]]`
 2. `==`操作符（双等）支持模式匹配 `[[ $file == foo.* ]]`
 
-`[ ]`为POSIX一部分，`[[ ]]`为bash特定（zsh也支持，其他shell可自行Google一下）
+`[ ]` 为POSIX一部分， `[[ ]]` 为bash特定（zsh也支持，其他shell可自行Google一下）
 
 #### (( )) 命令
 
@@ -717,33 +676,27 @@ fi
 | OR        | -o   | \|\|          |
 | NOT       | !    | !             |
 
-
-
 ## 第28章 读取键盘输入
 
-`read`命令，非常实用，看一遍
+`read` 命令，非常实用，看一遍
 
-这里有一个细节但是书上没说：[echo >&2](https://stackoverflow.com/questions/23489934/echo-2-some-text-what-does-it-mean-in-shell-scripting)这个问题。如果**想知根知底**，在看完上述Stack Overflow链接后，可以顺藤摸瓜看看[file descriptor](https://stackoverflow.com/questions/22367920/is-it-possible-that-linux-file-descriptor-0-1-2-not-for-stdin-stdout-and-stderr#:~:text=3%20Answers&text=At%20the%20file%20descriptor%20level,to%20be%20file%20descriptor%202.)的介绍；如果**只想知道它是干啥的**，后面“30.4.2 追踪”部分会讲解
-
-
+这里有一个细节但是书上没说：[echo >&2](https://stackoverflow.com/questions/23489934/echo-2-some-text-what-does-it-mean-in-shell-scripting)这个问题。如果**想知根知底**，在看完上述Stack Overflow链接后，可以顺藤摸瓜看看[file descriptor](https://stackoverflow.com/questions/22367920/is-it-possible-that-linux-file-descriptor-0-1-2-not-for-stdin-stdout-and-stderr#:~:text=3%20Answers&text=At%20the%20file%20descriptor%20level, to%20be%20file%20descriptor%202.)的介绍；如果**只想知道它是干啥的**，后面“30.4.2 追踪”部分会讲解
 
 ## 第29章 流控制：While和Until循环
 
-#### while结构
+### while结构
 
-```shell
+``` shell
 while commands; do
-	commands;
+  commands;
 done
 ```
 
-和C一样，while支持`break` 和 `continue`
+和C一样，while支持 `break` 和 `continue`
 
-#### until
+### until
 
-结构和while相同。但条件和while相反，就是如果while条件写 `-le 5`，那until写`-gt 5`，个人不习惯
-
-
+结构和while相同。但条件和while相反，就是如果while条件写 `-le 5` ，那until写 `-gt 5` ，个人不习惯
 
 ## 第30章 故障诊断
 
@@ -754,13 +707,11 @@ done
 3. `echo "xxxxx" >&2`上文提及的东东，类似js的`console.log(xxx)`
 4. bash也可用`#! /bin/bash -x`实现对脚本整体追踪 或用`set -x`和`set +x`部分追踪
 
-
-
 ## 第31章 流控制：case分支
 
 case结构
 
-```shell
+``` shell
 case xxx in
 	x)	commands
 		exit
@@ -779,7 +730,7 @@ case xxx in
 esac
 ```
 
-最后那个`esac`真的很皮，和escape无关，是case的逆序拼写
+最后那个 `esac` 真的很皮，和escape无关，是case的逆序拼写
 
 case模式范例
 
@@ -791,110 +742,97 @@ case模式范例
 | *.txt)       | 若关键字以 .txt 结尾，则吻合                                 |
 | *)           | **常放在case最后一个模式中**，用来处理所有和前模式不吻合的关键字 |
 
-
-
 ## 第32章 位置参数
 
 存储参数 \$1, \$2 ... \$9, \${10}, \${211}...
 
 `$#` ：确定实参数目
 
-当输入大量实参时，可用循环语句，结合`$#`和`shift`共同处理。`shift`作用类似流水线作业，工人只需顾着眼前零件，一个个检查，检查完挪动即可；它令shell只需处理1个参数，每处理完一个参数便往前移一位
+当输入大量实参时，可用循环语句，结合 `$#` 和 `shift` 共同处理。 `shift` 作用类似流水线作业，工人只需顾着眼前零件，一个个检查，检查完挪动即可；它令shell只需处理1个参数，每处理完一个参数便往前移一位
 
-处理多位置参数的方法：`$@` , `"$@"`,  `$*`, `"$*"`；常用`"$@"`
-
-
+处理多位置参数的方法： `$@` , `"$@"` , `$*` , `"$*"` ；常用 `"$@"`
 
 ## 第33章 流控制：for循环
 
 for命令语法为
 
-```shell
+``` shell
 for variable [in words]; do
 	commands
 done
 ```
 
-强大之处在于它支持花括号扩展方式（如`{a..d}`），路径名扩展方式（如`zip*.txt`），命令方式（如`$(strings $1)`）等
-
-
+强大之处在于它支持花括号扩展方式（如 `{a..d}` ），路径名扩展方式（如 `zip*.txt` ），命令方式（如 `$(strings $1)` ）等
 
 for命令也可用C语言格式表示
 
-```shell
+``` shell
 for (( expression1; expression2; expression3 )); do
 	commmands
 done
 ```
 
-
-
 ## 第34章 字符串和数字
 
 ### 空变量扩展
 
-空变量扩展管理有4种模式：`${parameter:-word}`, `${parameter:=word}`, `${parameter:?word}` 和 `${parameter:+word}`。需注意的是，位置参数和其他参数不能这么赋值
+空变量扩展管理有4种模式： `${parameter:-word}` , `${parameter:=word}` , `${parameter:?word}` 和 `${parameter:+word}` 。需注意的是，位置参数和其他参数不能这么赋值
 
-- `${parameter:-word}`和`${parameter:=word}`区别是后者当parameter未设定或为空时，除了扩展结果为word外，还会将word值赋予parameter；而前者只扩展，不赋值
+* `${parameter:-word}`和`${parameter:=word}`区别是后者当parameter未设定或为空时，除了扩展结果为word外，还会将word值赋予parameter；而前者只扩展，不赋值
 
-- `${parameter:?word}`：如果parameter未设定或为空，则会退出，并且word内容写入标准错误，shell以非零状态退出。`echo $?`可看到结果为1
-- `${parameter:+word}`：如果parameter未设定或为空，啥都不发生；否则word值取代parameter的值
+* `${parameter:?word}`：如果parameter未设定或为空，则会退出，并且word内容写入标准错误，shell以非零状态退出。`echo $?`可看到结果为1
+* `${parameter:+word}`：如果parameter未设定或为空，啥都不发生；否则word值取代parameter的值
 
 ### 返回变量名扩展
 
-返回变量名扩展：`${!prefix*}` / `${!prefix@}`，两者效果一样
+返回变量名扩展： `${!prefix*}` / `${!prefix@}` ，两者效果一样
 
 ### 字符串操作
 
-`${#parameter}`：如果parameter是字符串，则输出字符串长度；如果parameter是 "@" / "*"，则输出外置参数的个数
+`${#parameter}` ：如果parameter是字符串，则输出字符串长度；如果parameter是 "@" / "*"，则输出外置参数的个数
 
-`${parameter:offset:length}`：注意，这表达式虽然和python字符串截取长得有点像，但有很大区别
+`${parameter:offset:length}` ：注意，这表达式虽然和python字符串截取长得有点像，但有很大区别
 
-`${parameter#pattern}`和`${parameter##pattern}`：前者`#`获得去除最短匹配后留下来的结果；而后者`##`获得去除最长匹配后留下来的结果
+`${parameter#pattern}` 和 `${parameter##pattern}` ：前者 `#` 获得去除最短匹配后留下来的结果；而后者 `##` 获得去除最长匹配后留下来的结果
 
-`${parameter%pattern}`和`${parameter%%pattern}`类似，不过它们是从后往前读
+`${parameter%pattern}` 和 `${parameter%%pattern}` 类似，不过它们是从后往前读
 
-还有`${parameter/pattern/string}`, `${parameter//pattern/string}`, `${parameter/#pattern/string}`, `${parameter/%pattern/string}`之类，现用现学吧
-
+还有 `${parameter/pattern/string}` , `${parameter//pattern/string}` , `${parameter/#pattern/string}` , `${parameter/%pattern/string}` 之类，现用现学吧
 
 ### 算术计算与扩展
+
 #### 数字进制
 
-`base#number`：base进制的number
+`base#number` ：base进制的number
 
 #### 运算符、赋值、位操作、逻辑操作
-除取幂为`**`不一样外，其他运算符和C几乎相同
 
-`bc`：高精度计算
+除取幂为 `**` 不一样外，其他运算符和C几乎相同
 
-
+`bc` ：高精度计算
 
 ## 第35章 数组
 
-创建数组方式：`array[num]=value`, `declare -a array
+创建数组方式： `array[num]=value` , `declare -a array
 
-数组赋值：`array=(value1 value2 ...)`, `array=([0]=value1 [1]=value2 ...)`
+数组赋值： `array=(value1 value2 ...)` , `array=([0]=value1 [1]=value2 ...)`
 
-数组输出：`${array[*]}`和`${array[@]}`相同，都是按空格拆分；`"${array[*]}"`所有内容弄一行；`"${array[@]}"`一个数组项一行。`"${array[@]}"`最常用
+数组输出： `${array[*]}` 和 `${array[@]}` 相同，都是按空格拆分； `"${array[*]}"` 所有内容弄一行； `"${array[@]}"` 一个数组项一行。 `"${array[@]}"` 最常用
 
-查找下标：`"${!array[@]}"`
+查找下标： `"${!array[@]}"`
 
-数组末尾加元素：`array+=(value1 value2 ...)`
+数组末尾加元素： `array+=(value1 value2 ...)`
 
-数组删除（整个数组和单个元素）：`unset`
+数组删除（整个数组和单个元素）： `unset`
 
 数组不涉及下标赋值等同给数组第一个元素赋值
 
-
-
 ## 第36章 其他指令
 
-`trap`处理信号（如`ctrl + c`提前退出）
+`trap` 处理信号（如 `ctrl + c` 提前退出）
 
-`wait`异步执行
+`wait` 异步执行
 
-`mkfifo`创建和使用命名管道
-
-
+`mkfifo` 创建和使用命名管道
 
 完结撒花 :smile:
