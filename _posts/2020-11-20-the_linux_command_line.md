@@ -214,9 +214,15 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 安装vim后，终端跟着 `vimtutor` 学习，多刷几遍就会了
 
+我的系统语言设成了英文，所以vimtutor是英文版的；系统语言设置成中文可以获得中文版本
+
 <img src="https://i.imgur.com/UNefVRC.png" alt="vimtutor界面1"  />
 
-<img src="https://i.imgur.com/YhkDLZU.png" alt="vimtutor界面2"  />
+![image-20201125091925185](https://i.imgur.com/T1VShJx.png)
+
+多次阅读练习实践后，若还是记不住，可以看[Vim键位图](https://www.runoob.com/w3cnote/all-vim-cheatsheat.html)
+
+
 
 ## 第13章 定制提示符
 
