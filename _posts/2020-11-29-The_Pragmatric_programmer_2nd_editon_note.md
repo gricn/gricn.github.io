@@ -46,3 +46,24 @@ categories: 读书笔记
 * 开发人员间的重复：鼓励开发人员频繁交流，日常scrum晨会，开如slack之类的沟通频道；指派团队一人做项目知识管理员促进知识的传播，并在源码目录中设置一个存放位置，存放工具程序和工具脚本
 
 ### ETC——实现正交性：模块，组件化
+
+## 第3章 基础工具
+
+人类可描述形式的数据会比其他形式的数据以及创建数据的程序更加具有生命力：`123456789` < `<field1>123456789</field1>` < `<SSNO>123456789</SSNO>` 
+
+要充分利用shell的优势
+
+无鼠标/触控板挑战这部分已经实现，感谢学校购入这设计贼不合理的桌椅 ：）
+
+### 版本控制
+
+VCS：目前只会用git，虽然已经玩过[git游戏](https://learngitbranching.js.org/?locale=zh_CN)，但是在面对实际问题时还是有些吃力，于是又获得了如下建议：
+
+1. 阅读 Pro Git 2nd edition
+2. 遇到问题时去[git-flight-rules](https://github.com/k88hudson/git-flight-rules)仓库查找解决方案
+
+但是若基础太差，方法2可能不管用。我当时遇到了这样的问题，gitguardian检查出我一私有仓库暴露了token，虽然我并不会公开该仓库，但是觉得自己这习惯还是不好，再加上想练git，于是我想回到某一commit修改内容，用了对应的方法没效。折腾了老久，最后重新生成秘钥。
+
+另外，据[这篇文章](https://blog.martinfenner.org/2014/08/25/using-microsoft-word-with-git/#:~:text=Git%20can't%20merge%20binary,a%20format%20that%20git%20understands.&text=This%20would%20also%20work%20with,the%20markup%20of%20these%20formats.)说明，word可以用一款名为[Pandoc](https://pandoc.org/)的软件将docx转换成markdown，git merge，再将markdown转回成docx。（不过个人没试过，只是觉得很神奇，因为如果涉及做作业或者是写论文，能用git控制版本那真是太爽了）
+
+###
