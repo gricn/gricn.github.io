@@ -154,7 +154,7 @@ Su Mo Tu We Th Fr Sa
 
 > 这部分所有玩Ubuntu的人基本都应该会吧~~
 
-权限表示方法 分为 `八进制数字表示法` 和 `符号表示法`
+权限表示方法 分为 `八进制数字表示法` 和 `符号表示法` 
 
 符号表示法: u(user), g(group), o(other); 如： u+x; u-x; +x; o-rw; go=rw; u+x, go=rx; 这些表示方法
 
@@ -162,17 +162,17 @@ Su Mo Tu We Th Fr Sa
 
  我觉得书里这部分讲的不够清楚，在这举例说明。
 
-从书中可以得知， `umask` 是用来给创建文件制定默认权限的。在我的Ubuntu 18.04 LTS 系统中，输入 `umask` ，得到的值是022。所谓的掩码，就是在原本的基础上减去该值。
+从书中可以得知， `umask` 是用来给创建文件制定默认权限的。在我的Ubuntu 18. 04 LTS 系统中，输入 `umask` ，得到的值是022。所谓的掩码，就是在原本的基础上减去该值。
 
-"777-022=755" 因此，新创建的文件/文件夹权限为 `-rwxr-xr-x` / `drwxr-xr-x`
+"777-022=755" 因此，新创建的文件/文件夹权限为 `-rwxr-xr-x` / `drwxr-xr-x` 
 
 `umask number` 即可将掩码值修改为number
 
 ### chown
 
-chown [ower] [:[group]] file ...
+chown [ower] [:[group]] file ... 
 
-ie. `chown bob:users 1.txt`
+ie. `chown bob:users 1.txt` 
 
 ### chgrp
 
@@ -192,7 +192,7 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 ### 控制进程
 
-书本中 `xlogo` , `gedit` , `kwrite` 对于阿里云的Ubuntu 18.04 LTS无效（因为没用GUI），也没有任何 `jobs` ，因此 `fg` 命令也无效
+书本中 `xlogo` , `gedit` , `kwrite` 对于阿里云的Ubuntu 18. 04 LTS无效（因为没用GUI），也没有任何 `jobs` ，因此 `fg` 命令也无效
 
 `kill` 命令： `kill -1` 挂断信号； `kill -2` 中断信号； `kill -9` 杀死信号（以前很常用，但是这相当断电，不给应用保存机会）
 
@@ -222,8 +222,6 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 多次阅读练习实践后，若还是记不住，可以看[Vim键位图](https://www.runoob.com/w3cnote/all-vim-cheatsheat.html)
 
-
-
 ## 第13章 定制提示符
 
 文中 `PS1="\$ "` 只对当前显示有效，如需长久，可修改 `.bashrc` ， `.zshrc` 等文件
@@ -232,9 +230,9 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 在这只写个人常用的Debian系，Red Hat在需要时现学
 
-列出安装的软件包列表： `dpkg --list`
+列出安装的软件包列表： `dpkg --list` 
 
-显示软件包相关信息： `apt-cache show emacs`
+显示软件包相关信息： `apt-cache show emacs` 
 
 ## 第15章 存储介质
 
@@ -246,7 +244,7 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 `mkfs` 创建新操作系统。
 
-> 如将设备变成ext3文件系统类型： `sudo mkfs -t ext3 /dev/sdb1` ；格式化回原来系统FAT32： `sudo mkfs -t vfat /dev/sdb1` （实际上，该条指令用了mkfs.vfat 包，可格式化系统为FAT12、FAT16或FAT32；如要指定FAT具体参数，需指定 `sudo mkfs -t vfat -F 32 /dev/sdb1` 或精炼为 `sudo mkfs.vfat -F 32 /dev/sdb1` ）
+> 如将设备变成ext3文件系统类型： `sudo mkfs -t ext3 /dev/sdb1` ；格式化回原来系统FAT32： `sudo mkfs -t vfat /dev/sdb1` （实际上，该条指令用了mkfs. vfat 包，可格式化系统为FAT12、FAT16或FAT32；如要指定FAT具体参数，需指定 `sudo mkfs -t vfat -F 32 /dev/sdb1` 或精炼为 `sudo mkfs.vfat -F 32 /dev/sdb1` ）
 
 `fsck` 可用改命令检查设备文件系统损坏情况。多数系统检测到文件损坏，则会自动进入 `fsck` 模式
 
@@ -254,7 +252,7 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 建议：这节内容结合 `man` 一个个命令看
 
-创建**数据类DVD映像**副本： `dd if=/dev/cdrom of=ubuntu.iso`
+创建**数据类DVD映像**副本： `dd if=/dev/cdrom of=ubuntu.iso` 
 
 > dd: convert or copy a file
 >
@@ -264,11 +262,11 @@ chown与chgrp几乎相同，一些较早版本系统只能用chgrp修改
 
 创建**音频类DVD**：选用 `cdrdao` 命令
 
-挂载ISO映像文件： `mount -t iso9960 -o loop image.iso /mnt/iso_image`
+挂载ISO映像文件： `mount -t iso9960 -o loop image.iso /mnt/iso_image` 
 
 擦除可读写CD-ROM： `wodim dev=/dev/cdrw blank=fast` （在这fast为快速擦除类型）
 
-写入映像文件： `wodim dev=/dev/cdrw image.iso`
+写入映像文件： `wodim dev=/dev/cdrw image.iso` 
 
 附加认证： `md5sum filename` , `sha256sum filename` 之类
 
@@ -301,15 +299,15 @@ ssh remote-server 'ls * > a.txt'
 
 ![TESTS界面](https://i.imgur.com/hSDyXUo.png)
 
-`find ~ -type f -name "*.jpg" -size +1M` ：搜索 `~` 中符合.jpg通配符格式 大于1M的普通文件(-type f)
+`find ~ -type f -name "*.jpg" -size +1M` ：搜索 `~` 中符合. jpg通配符格式 大于1M的普通文件(-type f)
 
 #### 操作符
 
-`-and` ， `-or` ， `-not` ， `()`
+`-and` ， `-or` ， `-not` ， `()` 
 
-`find ~ \( -type f -not -perm 0600 \) -or \( -type d -not -perm 0700 \)` : 这里一是 `()` 在shell有其他含义，需要转义；二是 `-and` 是默认操作， `-type f -not -perm 0600` 等同于 `-type f -and -not -perm 0600`
+`find ~ \( -type f -not -perm 0600 \) -or \( -type d -not -perm 0700 \)` : 这里一是 `()` 在shell有其他含义，需要转义；二是 `-and` 是默认操作， `-type f -not -perm 0600` 等同于 `-type f -and -not -perm 0600` 
 
-`find` 操作符也存在**逻辑短路问题**： `-and` 和 `-or`
+`find` 操作符也存在**逻辑短路问题**： `-and` 和 `-or` 
 
 ### action选项
 
@@ -323,11 +321,11 @@ ssh remote-server 'ls * > a.txt'
 
 `find ~ -name '.jpg' -exec ls -l '{}' ';'` 和 `find ~ -name '.jpg' -exec ls -l '{}' +` （也可写成 `find ~ -name '.jpg' -print | xargs ls -l` ）
 
-推荐使用后者，执行完搜索后一次性执行后面指令，效率高很多。也可参考此文章： [xargs vs. exec {}](https://danielmiessler.com/blog/linux-xargs-vs-exec/#:~:text=When%20you%20use%20%2Dexec%20to, which%20is%20often%20just%20once.)；令据man find描述，出于安全性问题，推荐使用 `-execdir` 替换 `-exec` ，[这篇文章](https://learnfromnoobs.com/difference-between-find-exec-and-find-execdir-by-example/) 详细描述了两者区别
+推荐使用后者，执行完搜索后一次性执行后面指令，效率高很多。也可参考此文章： [xargs vs. exec {}](https://danielmiessler.com/blog/linux-xargs-vs-exec/#:~:text=When%20you%20use%20%2Dexec%20to, which%20is%20often%20just%20once. )；令据man find描述，出于安全性问题，推荐使用 `-execdir` 替换 `-exec` ，[这篇文章](https://learnfromnoobs.com/difference-between-find-exec-and-find-execdir-by-example/) 详细描述了两者区别
 
 那么用户自定义操作还有什么更有用的操作呢？
 
-如**批量改权限**： `find . \( -type f -not -perm 0600 -exec chmod 0600 '{}' ';' \)`
+如**批量改权限**： `find . \( -type f -not -perm 0600 -exec chmod 0600 '{}' ';' \)` 
 
 ## 第18章 归档和备份
 
@@ -365,7 +363,7 @@ zcat foo.txt.gz > foo.txt # 保留压缩文件同时生成新的txt文件
 
 #### bzip2（速度慢，质量高）
 
-`bzip2` ：和 `gz` 相似， `bzip2` 和 `bunzip2` 分别对应压缩和解压缩。后缀为 `.bz2`
+`bzip2` ：和 `gz` 相似， `bzip2` 和 `bunzip2` 分别对应压缩和解压缩。后缀为 `.bz2` 
 
 ### 文件归档
 
@@ -427,33 +425,33 @@ find playground -name 'file-A' | tar -czf playground.tgz -T - # -T（--files-fro
 
 `find playground -name "file-A" | zip -@ file-A.zip` 	zip可用 `-@` 将多个文件送至zip进行压缩
 
- `ls -l /etc/ | zip ls-etc.zip -`
+`ls -l /etc/ | zip ls-etc.zip -` 
 
 ### 同步文件和目录
 
-本地文件或目录 + 远程rsync服务器 `rsync://[user@]host[:port]/path`
+本地文件或目录 + 远程rsync服务器 `rsync://[user@]host[:port]/path` 
 
 `rsync -av playground foo` ： `-a` 递归归档并保留文件属性。在这 `foo` 目录生成了playground的目录镜像备份。每当发生变化时，重新用该命令。也可加 `--delete` （如 `--delete /etc` 来删除不需要的文件夹
 
 #### rsync连接方式
 
-1. ssh加密隧道连接：`sudo rsync -av --rsh=ssh host/path`
-2. rsync服务器连接：`rsync -av rsync://host/path`
+1. ssh加密隧道连接： `sudo rsync -av --rsh=ssh host/path` 
+2. rsync服务器连接： `rsync -av rsync://host/path` 
 
 ## 第19章 正则表达式
 
-`grep` ( global regular expression print )： `grep [options] regex [file...]`
+`grep` ( global regular expression print )： `grep [options] regex [file...]` 
 
 grep常用options：
 
-* `-i`：忽略大小写
-* `-v`：反选
-* `-c`：输出匹配数量
-* `-l`：输出匹配项文件名而非匹配行自身
-* `-L`：输出不包含匹配项文件名而非匹配行自身
+* `-i` ：忽略大小写
+* `-v` ：反选
+* `-c` ：输出匹配数量
+* `-l` ：输出匹配项文件名而非匹配行自身
+* `-L` ：输出不包含匹配项文件名而非匹配行自身
 
-* `-n`：匹配行前加入该行在文件内行号
-* `-h`：多文件搜索时，抑制文件名输出（即用了该参数后，只输出符合内容，并不会在内容前写该内容所在的文件名）
+* `-n` ：匹配行前加入该行在文件内行号
+* `-h` ：多文件搜索时，抑制文件名输出（即用了该参数后，只输出符合内容，并不会在内容前写该内容所在的文件名）
 
 ``` shell
 # 搜索例子
@@ -467,10 +465,10 @@ grep zip dirlist*.txt
 
 最初ASCII是为美式英语设置的，随着Unix普及，POSIX为各个国家适配，按照字典排序法 `aAbBcC...yYzZ` 。Ubuntu等系统POSIX兼容的应用程序使用字典字母排序顺序，而非ASCII码字符排序顺序（ `[A-C]*` 表达的实际等同于 `[AbBcC]*` ，而非我们想要的 `[ABC]*` ）
 
-> `[:alnum:]` ：等同 `[A-Za-z0-9]`
+> `[:alnum:]` ：等同 `[A-Za-z0-9]` 
 
 >
-> `[:word:]` ：等同 `[_A-Za-z0-9]`
+> `[:word:]` ：等同 `[_A-Za-z0-9]` 
 
 >
 > `[:alpha:]` ：字母字符
@@ -499,11 +497,11 @@ grep zip dirlist*.txt
 
 举个好玩的，根据日历排序（以下图片来自CSDN “[Code speaking](https://blog.csdn.net/greywolf5)” 用户）
 
-``sort -k=3.7 -nbr -k=3.1 -nbr --k=3.4 -nbr a.txt **注意下面shell命令--k应为-k**
+``sort -k=3. 7 -nbr -k=3. 1 -nbr --k=3. 4 -nbr a. txt **注意下面shell命令--k应为-k**
 
 ![排序结果](https://img-blog.csdnimg.cn/20191204145425412.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dyZXl3b2xmNQ==,size_16,color_FFFFFF,t_70)
 
- `sort -t ‘:’ -k 7 /etc/passwd | head`
+`sort -t ‘:’ -k 7 /etc/passwd | head` 
 
 ![-t作为字段分隔符](https://img-blog.csdnimg.cn/20191204150402570.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dyZXl3b2xmNQ==,size_16,color_FFFFFF,t_70)
 
@@ -519,13 +517,13 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 #### paste
 
- `paste a.txt b.txt`
+`paste a.txt b.txt` 
 
 #### join
 
 类比数据库join，在有一个公共字段的基础上，连接两个数据表
 
- `join a.txt b.txt`
+`join a.txt b.txt` 
 
 ### 文件比较
 
@@ -551,7 +549,7 @@ uniq只对排好序的文本有用，所以要先用sort排序（因为uniq只�
 
 这章学的和上章一样很迷，因为我没有太多相关需求。
 
-`nl` 对行进行标号： `nl a.txt`
+`nl` 对行进行标号： `nl a.txt` 
 
 `fold` 指定行宽，超过则wrap： `echo "xxxxx" | fold -w 10` ；如果加 `-s` 参数，则考虑单词边界。总之就当是个
 
@@ -631,7 +629,7 @@ token
 
 ## 第26章 自顶向下设计
 
-shell局部变量定义： `local xxx`
+shell局部变量定义： `local xxx` 
 
 ## 第27章 流控制：IF分支语句
 
@@ -647,15 +645,15 @@ fi
 
 ### test命令
 
-特点是，单中括号对[ ]，**注意空格问题**，**注意空格问题**！ `[` 是 `test` 的符号链接，详情可参考[这篇文章](https://www.shellscript.sh/test.html)，或可慢慢往下阅读，书中**30.1.2 符号缺失冗余**会介绍（个人觉得文章讲的比后面更棒）
+特点是，单中括号对[ ]，**注意空格问题**，**注意空格问题**！ `[` 是 `test` 的符号链接，详情可参考[这篇文章](https://www.shellscript.sh/test.html)，或可慢慢往下阅读，书中**30. 1. 2 符号缺失冗余**会介绍（个人觉得文章讲的比后面更棒）
 
 #### 文件表达式
 
-可用表达式评估文件的状态 `-x file`
+可用表达式评估文件的状态 `-x file` 
 
 如： `-e file` 用来判断文件是否存在
 
-详情可 `man test`
+详情可 `man test` 
 
 ### 符号命令
 
@@ -665,8 +663,8 @@ fi
 
 **特点**
 
-1. 支持正则：`[[ string =~ regex ]]`
-2. `==`操作符（双等）支持模式匹配 `[[ $file == foo.* ]]`
+1. 支持正则： `[[ string =~ regex ]]` 
+2. `==` 操作符（双等）支持模式匹配 `[[ $file == foo.* ]]` 
 
 `[ ]` 为POSIX一部分， `[[ ]]` 为bash特定（zsh也支持，其他shell可自行Google一下）
 
@@ -686,7 +684,7 @@ fi
 
 `read` 命令，非常实用，看一遍
 
-这里有一个细节但是书上没说：[echo >&2](https://stackoverflow.com/questions/23489934/echo-2-some-text-what-does-it-mean-in-shell-scripting)这个问题。如果**想知根知底**，在看完上述Stack Overflow链接后，可以顺藤摸瓜看看[file descriptor](https://stackoverflow.com/questions/22367920/is-it-possible-that-linux-file-descriptor-0-1-2-not-for-stdin-stdout-and-stderr#:~:text=3%20Answers&text=At%20the%20file%20descriptor%20level, to%20be%20file%20descriptor%202.)的介绍；如果**只想知道它是干啥的**，后面“30.4.2 追踪”部分会讲解
+这里有一个细节但是书上没说：[echo >&2](https://stackoverflow.com/questions/23489934/echo-2-some-text-what-does-it-mean-in-shell-scripting)这个问题。如果**想知根知底**，在看完上述Stack Overflow链接后，可以顺藤摸瓜看看[file descriptor](https://stackoverflow.com/questions/22367920/is-it-possible-that-linux-file-descriptor-0-1-2-not-for-stdin-stdout-and-stderr#:~:text=3%20Answers&text=At%20the%20file%20descriptor%20level, to%20be%20file%20descriptor%202. )的介绍；如果**只想知道它是干啥的**，后面“30. 4. 2 追踪”部分会讲解
 
 ## 第29章 流控制：While和Until循环
 
@@ -698,7 +696,7 @@ while commands; do
 done
 ```
 
-和C一样，while支持 `break` 和 `continue`
+和C一样，while支持 `break` 和 `continue` 
 
 ### until
 
@@ -708,10 +706,10 @@ done
 
 这里讲了很多小技巧：
 
-1. 补充一个前面不知哪儿描述的小技巧：`if [ "$number" = 1 ]`，这里如果number值为空，则会变成`if [ "" = 1 ]`；而如果不加双引号，当number值为空时，则会变成`if [ =1 ]`，直接报错
-2. 当涉及换目录`rm *`时，得写成`cd $dir_name && rm *`。这样当cd失败时就不会执行后半句。当然最好再详细些，如果跳转失败结束脚本运行。
-3. `echo "xxxxx" >&2`上文提及的东东，类似js的`console.log(xxx)`
-4. bash也可用`#! /bin/bash -x`实现对脚本整体追踪 或用`set -x`和`set +x`部分追踪
+1. 补充一个前面不知哪儿描述的小技巧： `if [ "$number" = 1 ]` ，这里如果number值为空，则会变成 `if [ "" = 1 ]` ；而如果不加双引号，当number值为空时，则会变成 `if [ =1 ]` ，直接报错
+2. 当涉及换目录 `rm *` 时，得写成 `cd $dir_name && rm *` 。这样当cd失败时就不会执行后半句。当然最好再详细些，如果跳转失败结束脚本运行。
+3. `echo "xxxxx" >&2` 上文提及的东东，类似js的 `console.log(xxx)` 
+4. bash也可用 `#! /bin/bash -x` 实现对脚本整体追踪 或用 `set -x` 和 `set +x` 部分追踪
 
 ## 第31章 流控制：case分支
 
@@ -745,18 +743,18 @@ case模式范例
 | a)           | 若关键字为a，则吻合                                          |
 | [[:alpha:]]) | 若关键字为单个字母，则吻合                                   |
 | ???)         | 若关键字为三个字符，则吻合                                   |
-| *.txt)       | 若关键字以 .txt 结尾，则吻合                                 |
+| *. txt)       | 若关键字以 . txt 结尾，则吻合                                 |
 | *)           | **常放在case最后一个模式中**，用来处理所有和前模式不吻合的关键字 |
 
 ## 第32章 位置参数
 
-存储参数 \$1, \$2 ... \$9, \${10}, \${211}...
+存储参数 \$1, \$2 ... \$9, \${10}, \${211}... 
 
 `$#` ：确定实参数目
 
 当输入大量实参时，可用循环语句，结合 `$#` 和 `shift` 共同处理。 `shift` 作用类似流水线作业，工人只需顾着眼前零件，一个个检查，检查完挪动即可；它令shell只需处理1个参数，每处理完一个参数便往前移一位
 
-处理多位置参数的方法： `$@` , `"$@"` , `$*` , `"$*"` ；常用 `"$@"`
+处理多位置参数的方法： `$@` , `"$@"` , `$*` , `"$*"` ；常用 `"$@"` 
 
 ## 第33章 流控制：for循环
 
@@ -784,10 +782,10 @@ done
 
 空变量扩展管理有4种模式： `${parameter:-word}` , `${parameter:=word}` , `${parameter:?word}` 和 `${parameter:+word}` 。需注意的是，位置参数和其他参数不能这么赋值
 
-* `${parameter:-word}`和`${parameter:=word}`区别是后者当parameter未设定或为空时，除了扩展结果为word外，还会将word值赋予parameter；而前者只扩展，不赋值
+* `${parameter:-word}` 和 `${parameter:=word}` 区别是后者当parameter未设定或为空时，除了扩展结果为word外，还会将word值赋予parameter；而前者只扩展，不赋值
 
-* `${parameter:?word}`：如果parameter未设定或为空，则会退出，并且word内容写入标准错误，shell以非零状态退出。`echo $?`可看到结果为1
-* `${parameter:+word}`：如果parameter未设定或为空，啥都不发生；否则word值取代parameter的值
+* `${parameter:?word}` ：如果parameter未设定或为空，则会退出，并且word内容写入标准错误，shell以非零状态退出。 `echo $?` 可看到结果为1
+* `${parameter:+word}` ：如果parameter未设定或为空，啥都不发生；否则word值取代parameter的值
 
 ### 返回变量名扩展
 
@@ -821,15 +819,15 @@ done
 
 创建数组方式： `array[num]=value` , `declare -a array
 
-数组赋值： `array=(value1 value2 ...)` , `array=([0]=value1 [1]=value2 ...)`
+数组赋值： `array=(value1 value2 ...)` , `array=([0]=value1 [1]=value2 ...)` 
 
 数组输出： `${array[*]}` 和 `${array[@]}` 相同，都是按空格拆分； `"${array[*]}"` 所有内容弄一行； `"${array[@]}"` 一个数组项一行。 `"${array[@]}"` 最常用
 
-查找下标： `"${!array[@]}"`
+查找下标： `"${!array[@]}"` 
 
-数组末尾加元素： `array+=(value1 value2 ...)`
+数组末尾加元素： `array+=(value1 value2 ...)` 
 
-数组删除（整个数组和单个元素）： `unset`
+数组删除（整个数组和单个元素）： `unset` 
 
 数组不涉及下标赋值等同给数组第一个元素赋值
 
