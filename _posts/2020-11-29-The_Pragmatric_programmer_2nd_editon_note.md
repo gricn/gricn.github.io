@@ -66,4 +66,4 @@ VCS：目前只会用git，虽然已经玩过[git游戏](https://learngitbranchi
 
 另外，据[这篇文章](https://blog.martinfenner.org/2014/08/25/using-microsoft-word-with-git/#:~:text=Git%20can't%20merge%20binary,a%20format%20that%20git%20understands.&text=This%20would%20also%20work%20with,the%20markup%20of%20these%20formats.)说明，word可以用一款名为[Pandoc](https://pandoc.org/)的软件将docx转换成markdown，git merge，再将markdown转回成docx。（不过个人没试过，只是觉得很神奇，因为如果涉及做作业或者是写论文，能用git控制版本那真是太爽了）
 
-###
+期末考试，这部分停更一周

@@ -1,5 +1,5 @@
 ---
-title: "Linux命令行大全"
+title: "Linux命令行大全 读书笔记"
 date:   2020-11-20 09:00:00 +0800
 categories: 读书笔记
 ---
