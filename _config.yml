@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Site Settings
 locale                   : "zh-CN"
-title                    : "欢迎来到 William Liu 的博客"
+title                    : "各位看官随便瞅瞅"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "William Liu"
-description              : "一个正在努力奋斗的CS小白:smile:"
+description              : "平凡人一个"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -121,7 +121,7 @@ author:
     #   url: "https://gricn.github.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/gricnnn"
+      # url: "https://twitter.com/gricnnn"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
@@ -130,7 +130,7 @@ author:
       url: "https://github.com/gricn"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/gricnnnn/"
+      # url: "https://www.instagram.com/gricnnnn/"
 
 # Site Footer
 footer:
