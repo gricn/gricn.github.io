@@ -79,4 +79,8 @@ categories: 内容推荐
 - Adobe Premiere Pro。看了b站一期1h视频就开始上手了。对于我这种非视频专业用户而言挺好用。
 - DaVinci Resolve。为了支持正版使用过，不如pr好用。
 
+### PDF阅读编辑
+- [Bookfusion](https://www.bookfusion.com/bookshelf)，我目前用的跨平台PDF阅读App。跨端时能返回最后阅读页面，还OK。免费版有可存储书籍数目和单个文件大小限制，PDF扫描图片版用不了。
+- [Polar](https://app.getpolarized.io/)，搜索跨平台PDF阅读软件时在YCombinator看到。功能约为云盘+XODO+阅读上优化，没有最后阅读页数。觉得没有太多特点。
+
 （to be continued)
