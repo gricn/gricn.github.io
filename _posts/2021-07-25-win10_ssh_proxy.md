@@ -4,6 +4,16 @@ date: 2021-07-25 14:00:00 +0800
 categories: 技术分享
 ---
 
+## 7 月 28 日更新
+
+7 月 27 日晚上服务器怎么都无法通过代理连接，然后想起韦易笑文章下有人评论“ssh 代理后的机场都爆了”。
+
+现在先用[Mosh](https://mosh.org/#about)，目前很满意，下午开了三个小窗口连接了分别 3 小时都没有断过。等晚高峰再看看。
+
+---
+
+**以下内容写于 7 月 25 日**
+
 因为我有一个用来订阅 RSS 的境外服务器没在国内备案，开始还几乎能正常连接，半个月时候发现晚上上网高峰期 SSH 总是容易断线。用了将近一个月后，发现连接半分钟就会被掐断，彻底连不上了。
 
 于是想到用 SSH 代理。在这做个笔记。
@@ -16,7 +26,7 @@ categories: 技术分享
 
 OpenSSH 是 Win10 自带的 SSH 软件，也被 VSCode Remote - SSH 也默认使用。
 
-根据[serverfault 一回答](https://serverfault.com/questions/956613/windows-10-ssh-proxycommand-posix-spawn-no-such-file-or-directory)介绍在 `C:\Users\YOUR_USER_NAME\.ssh\config`中添加或修改以下内容。
+根据[ServerFault 一回答](https://serverfault.com/questions/956613/windows-10-ssh-proxycommand-posix-spawn-no-such-file-or-directory)介绍在 `C:\Users\YOUR_USER_NAME\.ssh\config`中添加或修改以下内容。
 
 ```
 Host jumphost
@@ -58,7 +68,7 @@ ssh -D SOCKS5_PORT example.com
 
 ### 解决方法
 
-**Step 1**
+#### Step 1
 
 先根据报错信息搜索，在阅读 Stack Overflow [这个方法](https://stackoverflow.com/a/61185626/10878775)评论描述中意识到也许是`known_hosts`的问题。
 
@@ -90,7 +100,7 @@ Windows 下的`known_hosts`是明文显示，很容易阅读；而 Ubuntu 中的
 
 三者都一模一样，看来不是这里的问题。
 
-**Step 2**
+#### Step 2
 
 尽可能搜集信息，用 `ssh -vvv example.com` 得到最详细的信息
 
@@ -157,3 +167,7 @@ Host example.com
 ```
 
 早就听闻 OpenSSH 的 Windows 版本不稳定，今日终于有所闻。不过具体原因目前还无法诊断，使用自带的 OpenSSH 问题依旧存在，这次算是侥幸用第三方工具替代成功。这个问题依旧存在，以后能力提升后解决。
+
+## 推荐文章
+
+- [SSH 命令的三种代理功能（-L/-R/-D）](https://zhuanlan.zhihu.com/p/57630633)
