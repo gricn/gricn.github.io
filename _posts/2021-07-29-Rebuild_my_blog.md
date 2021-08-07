@@ -4,7 +4,7 @@ date: 2021-07-29 15:00:00 +0800
 categories: 生活小事
 ---
 
-## 原因
+## 重建缘由
 
 我的第一个博客是在 2019-07-30 搭建的，至今已经用了 2 年时间（详见 [个人 blog 搭建完成](https://gricn.github.io/%E9%A1%B9%E7%9B%AE%E5%BF%83%E5%BE%97/githubpage_review/) 博文）。
 
