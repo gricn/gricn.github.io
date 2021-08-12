@@ -18,7 +18,26 @@ categories: 技术分享
 
 ![adksetup安装界面](https://i.imgur.com/3Y5tfcT.jpg)
 
-按照教程成功安装完后开启的系统是只有一个 cmd 界面的伪 win10 系统，不实用，取消。
+这里还有一个坑，`copype.bat`要添加或更改部分代码。我改的是`FWFILESROOT`，安装程序默认给的路径是`%OSCDImgRoot%\..\..\%WINPE_ARCH%\Oscdimg`，由于对应路径找不到`Oscdimg`，故报错。
+
+```bat
+rem
+rem Add Two Parameters
+rem
+set WinPERoot=C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment
+set OSCDImgRoot=C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools
+
+rem
+rem Set environment variables for use in the script
+rem
+set WINPE_ARCH=%1
+set SOURCE=%WinPERoot%\%WINPE_ARCH%
+set FWFILESROOT=%OSCDImgRoot%\%WINPE_ARCH%\Oscdimg
+set DEST=%~2
+set WIMSOURCEPATH=%SOURCE%\en-us\winpe.wim
+```
+
+不过，即使按照教程成功安装完后开启的系统是只有一个 cmd 界面的伪 win10 系统，不实用，取消。
 
 ### 用 DiskGenius 生成 PE 盘
 
