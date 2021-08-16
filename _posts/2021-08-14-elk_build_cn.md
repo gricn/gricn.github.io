@@ -209,6 +209,8 @@ GET /_search
 
 `match_phrase`则是得到包含**相同顺序搜索字段**的全文，最有一个词必须完全匹配。
 
+`match_bool_prefix`和`match_phrase_prefix`不同之处在于它并不要求这些字段的相对顺序
+
 ### range
 
 ```DSL
@@ -252,22 +254,22 @@ PUT new_index
 {
   "mappings": {
     "properties" : {
-        "@timestamp" : {
-          "type" : "date"
-        },
-        ...
-        "title" : {
-          "type" : "text",
-          "analyzer": "ik_max_word",
-          "search_analyzer": "ik_smart",
-          "fields" : {
-            "keyword" : {
-              "type" : "keyword",
-              "ignore_above" : 256
-            }
+      "@timestamp" : {
+        "type" : "date"
+      },
+      ...
+      "title" : {
+        "type" : "text",
+        "analyzer": "ik_max_word",
+        "search_analyzer": "ik_smart",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
           }
-        },
-        ...
+        }
+      },
+      ...
     }
   }
 }
