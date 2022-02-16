@@ -1,3 +1,4 @@
 {
-  "telemetry.enableCrashReporter": false
+  "telemetry.enableCrashReporter": false,
+  "cSpell.words": ["dragonman", "notablog"]
 }
