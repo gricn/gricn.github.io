@@ -1,0 +1,15 @@
+# Archived legacy Travis CI config.
+# Travis CI .org is no longer used for this blog deployment.
+# The new deployment path should be GitHub Actions plus GitHub Pages.
+
+language: ruby
+cache: bundler
+before_install:
+  - gem install bundler
+script:
+  - bundle exec jekyll algolia
+branches:
+  only:
+    - master
+rvm:
+  - 2.4
