@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+function slugFromId(id) {
+  return id
+    .replace(/^\d{4}-\d{1,2}-\d{1,2}-/, '')
+    .replace(/\.mdx?$/, '');
+}
+
+function dateValue(value) {
+  if (!value) return 0;
+  if (value instanceof Date) return value.getTime();
+  const parsed = new Date(String(value).replace(' +0800', '+08:00'));
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+}
+
+function formatDate(value) {
+  const time = dateValue(value);
+  if (!time) return '未注明日期';
+  return new Intl.DateTimeFormat('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(new Date(time));
+}
+
+function categoryOf(frontmatter) {
+  const value = frontmatter.categories ?? frontmatter.category;
+  return Array.isArray(value) ? value.join(' / ') : value || '未分类';
+}
+
+const posts = (await getCollection('blog'))
+  .map((post) => ({
+    title: post.data.title,
+    date: post.data.date,
+    category: categoryOf(post.data),
+    slug: slugFromId(post.id)
+  }))
+  .sort((a, b) => dateValue(b.date) - dateValue(a.date))
+  .slice(0, 6);
+---
+
+<BaseLayout>
+  <section class="intro">
+    <p class="eyebrow">个人博客</p>
+    <h1>记录技术学习、生活观察和长期思考。</h1>
+    <p class="lead">
+      这个博客正在从旧 Jekyll 结构迁移到 Astro。第一阶段先保留文章、降低外链依赖，并建立可持续写作和 GitHub Pages 自动部署的基础。
+    </p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>最新文章</h2>
+      <a href="/blog">查看全部</a>
+    </div>
+    <ol class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <a href={`/blog/${post.slug}`}>{post.title}</a>
+          <div class="meta">
+            <span>{formatDate(post.date)}</span>
+            <span>{post.category}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
